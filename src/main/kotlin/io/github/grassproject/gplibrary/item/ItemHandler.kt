@@ -1,5 +1,6 @@
 package io.github.grassproject.gplibrary.item
 
+import io.github.grassproject.gplibrary.item.factory.HDBFactory
 import io.github.grassproject.gplibrary.item.factory.IAFactory
 import io.github.grassproject.gplibrary.item.factory.NexoFactory
 import org.bukkit.Material
@@ -12,6 +13,7 @@ object ItemHandler {
         val itemValue = id.substringAfter(":", missingDelimiterValue = id)
 
         return when (itemType) {
+            "hdb" -> HDBFactory.create(itemValue)
             "ia", "itemsadder" -> IAFactory.create(itemValue)
             "nexo" -> NexoFactory.create(itemValue)
             "minecraft" -> Material.matchMaterial(itemValue.uppercase())?.let { ItemStack(it) }

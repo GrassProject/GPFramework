@@ -20,6 +20,7 @@ dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.7-R0.1-SNAPSHOT") // Paper
     compileOnly("dev.lone:api-itemsadder:4.0.10")
     compileOnly("com.nexomc:nexo:1.8.0")
+    compileOnly("com.arcaniax:HeadDatabase-API:1.3.2")
 
     compileOnly(fileTree("lib") {
         include("*.jar")

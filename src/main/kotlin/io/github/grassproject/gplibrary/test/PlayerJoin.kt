@@ -10,6 +10,8 @@ import org.bukkit.damage.DamageType
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
+import org.bukkit.inventory.ItemStack
+import org.bukkit.inventory.meta.SkullMeta
 import org.bukkit.tag.DamageTypeTags
 
 class PlayerJoin : Listener {
@@ -33,5 +35,9 @@ class PlayerJoin : Listener {
             )
             .setGlider(true)
             .build()
+
+//        val items = ItemStack(Material.PLAYER_HEAD)
+//            .itemMeta as SkullMeta
+//        val a = items.setOwningPlayer()
     }
 }
