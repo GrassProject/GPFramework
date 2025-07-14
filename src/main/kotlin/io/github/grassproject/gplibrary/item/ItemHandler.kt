@@ -7,16 +7,16 @@ import org.bukkit.inventory.ItemStack
 
 object ItemHandler {
 
-    fun createItem(id: String): ItemStack? {
+    fun createItem(id: String): ItemStack {
         val itemType = id.substringBefore(":").lowercase()
         val itemValue = id.substringAfter(":", missingDelimiterValue = id)
 
         return when (itemType) {
             "ia", "itemsadder" -> IAFactory.create(itemValue)
             "nexo" -> NexoFactory.create(itemValue)
-            "minecraft" -> Material.matchMaterial(itemValue.uppercase())?.let { ItemStack(it) } ?: ItemStack(Material.AIR)
-            else -> Material.matchMaterial(id.uppercase())?.let { ItemStack(it) } ?: ItemStack(Material.AIR)
-        } ?: ItemStack(Material.AIR)
+            "minecraft" -> Material.matchMaterial(itemValue.uppercase())?.let { ItemStack(it) }
+            else -> Material.matchMaterial(id.uppercase())?.let { ItemStack(it) }
+        } ?: ItemStack(Material.STONE)
 
     }
 
