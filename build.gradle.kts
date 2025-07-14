@@ -3,6 +3,7 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 plugins {
     kotlin("jvm") version "2.1.21"
     id("com.gradleup.shadow") version  "9.0.0-beta10"
+//    id("xyz.jpenilla.run-paper") version "2.3.1"
 }
 
 group = "io.github.grassproject"
@@ -24,15 +25,17 @@ dependencies {
         include("*.jar")
     })
 
-    testImplementation(kotlin("test"))
-}
+    // implementation("org.reflections:reflections:0.10.2")
 
-tasks.test {
-    useJUnitPlatform()
+    testImplementation(kotlin("test"))
 }
 
 kotlin {
     jvmToolchain(21)
+}
+
+tasks.test {
+    useJUnitPlatform()
 }
 
 tasks.build {
@@ -40,8 +43,9 @@ tasks.build {
 }
 
 tasks.withType<ShadowJar> {
-    exclude("kotlin/**")
+    // exclude("kotlin/**")
     exclude("org/**")
+    // exclude("META-INF/**")
 
 //    relocate("dev.jorel.commandapi", "com.github.soldam.lib.commandapi")
 //
@@ -50,7 +54,7 @@ tasks.withType<ShadowJar> {
 //    }
 
     archiveFileName.set("${rootProject.name}-${rootProject.version}.jar")
-    // destinationDirectory=file("C:\\Users\\aa010\\Desktop\\SoldamPlugin\\plugins")
+    destinationDirectory=file("C:\\Users\\aa990\\OneDrive\\바탕 화면\\GPServer\\plugins")
 }
 
 tasks.processResources {
@@ -64,3 +68,10 @@ tasks.processResources {
         expand(props)
     }
 }
+
+//tasks.runServer {
+//        // Configure the Minecraft version for our task.
+//        // This is the only required configuration besides applying the plugin.
+//        // Your plugin's jar (or shadowJar if present) will be used automatically.
+//    minecraftVersion("1.21.1")
+//}

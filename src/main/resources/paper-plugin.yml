@@ -1,7 +1,7 @@
 name: GPLibrary
 main: io.github.grassproject.gplibrary.GPLibraryPlugin
 bootstrapper: io.github.grassproject.gplibrary.GPLibraryBootstrap
-loader: io.github.grassproject.gplibrary.NightCoreLoader
+loader: io.github.grassproject.gplibrary.GPLibraryLoader
 version: '${version}'
 api-version: '1.21'
 author: GrassProject

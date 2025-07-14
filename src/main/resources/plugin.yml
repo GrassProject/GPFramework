@@ -6,4 +6,4 @@ author: GrassProject
 description: PluginLibrary
 # load: STARTUP
 libraries:
-# - com.zaxxer:HikariCP:6.0.0
+  - org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.1.21

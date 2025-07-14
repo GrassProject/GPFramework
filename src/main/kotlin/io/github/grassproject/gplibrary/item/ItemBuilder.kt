@@ -1,7 +1,6 @@
 package io.github.grassproject.gplibrary.item
 
 import io.github.grassproject.gplibrary.GPLibraryPlugin
-import io.papermc.paper.datacomponent.item.CustomModelData
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.format.TextDecoration
@@ -31,6 +30,15 @@ class ItemBuilder(var itemStack: ItemStack) {
     constructor(material: Material) : this(ItemStack(material))
 
     constructor(id: String) : this(ItemHandler.createItem(id))
+
+    fun setNamespacedKey(namespacedKey: NamespacedKey, id: String): ItemBuilder {
+        itemMeta.persistentDataContainer.set(
+            namespacedKey,
+            PersistentDataType.STRING,
+            id
+        )
+        return this
+    }
 
     fun setType(type: Material): ItemBuilder {
         itemStack = ItemStack(type)
@@ -123,6 +131,7 @@ class ItemBuilder(var itemStack: ItemStack) {
     }
 
     // 1_21_2 +
+    @Deprecated("임시")
     fun setUseCooldownComponent(useCooldownComponent: UseCooldownComponent): ItemBuilder {
         itemMeta.setUseCooldown(useCooldownComponent)
         return this
@@ -149,8 +158,8 @@ class ItemBuilder(var itemStack: ItemStack) {
         return this
     }
 
-    fun setDamageResistant(damageResistant: Tag<DamageType>): ItemBuilder {
-        itemMeta.damageResistant = damageResistant
+    fun setDamageResistant(vararg damageResistant: Tag<DamageType>): ItemBuilder {
+        damageResistant.forEach { itemMeta.damageResistant = it }
         return this
     }
 
