@@ -10,11 +10,15 @@ version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
-    maven("https://repo.papermc.io/repository/maven-public/")
+    maven("https://repo.papermc.io/repository/maven-public/") // Paper
+    maven("https://maven.devs.beer/")
+    maven("https://repo.nexomc.com/releases")
 }
 
 dependencies {
-    compileOnly("io.papermc.paper", "paper-api", "1.21.7-R0.1-SNAPSHOT") // Paper
+    compileOnly("io.papermc.paper:paper-api:1.21.7-R0.1-SNAPSHOT") // Paper
+    compileOnly("dev.lone:api-itemsadder:4.0.10")
+    compileOnly("com.nexomc:nexo:1.8.0")
 
     compileOnly(fileTree("lib") {
         include("*.jar")
