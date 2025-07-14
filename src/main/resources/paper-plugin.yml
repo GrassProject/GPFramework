@@ -1,0 +1,20 @@
+name: GPLibrary
+main: io.github.grassproject.gplibrary.GPLibraryPlugin
+bootstrapper: io.github.grassproject.gplibrary.GPLibraryBootstrap
+loader: io.github.grassproject.gplibrary.NightCoreLoader
+version: '${version}'
+api-version: '1.21'
+author: GrassProject
+description: PluginLibrary
+# load: STARTUP
+dependencies:
+  server:
+    Vault:
+      required: false
+      join-classpath: true
+    LuckPerms:
+      required: false
+      join-classpath: true
+    PlaceholderAPI:
+      required: false
+      join-classpath: true
