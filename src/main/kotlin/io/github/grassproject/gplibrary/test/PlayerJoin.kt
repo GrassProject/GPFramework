@@ -1,17 +1,16 @@
 package io.github.grassproject.gplibrary.test
 
 import io.github.grassproject.gplibrary.item.ItemBuilder
-import io.github.grassproject.gplibrary.item.ItemHandler
+import io.github.grassproject.gplibrary.util.get
+import io.github.grassproject.gplibrary.util.set
 import net.kyori.adventure.text.Component
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
-import org.bukkit.Registry
-import org.bukkit.damage.DamageType
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.inventory.ItemStack
-import org.bukkit.inventory.meta.SkullMeta
+import org.bukkit.persistence.PersistentDataType
 import org.bukkit.tag.DamageTypeTags
 
 class PlayerJoin : Listener {
@@ -19,7 +18,10 @@ class PlayerJoin : Listener {
     @EventHandler
     fun PlayerJoinEvent.on() {
         player.inventory.addItem(item)
-
+        items[key, PersistentDataType.INTEGER] = 100
+        player.sendMessage(
+            Component.text("Value is: ${items[key, PersistentDataType.INTEGER] ?: "없음"}")
+        )
 
     }
 
@@ -36,8 +38,7 @@ class PlayerJoin : Listener {
             .setGlider(true)
             .build()
 
-//        val items = ItemStack(Material.PLAYER_HEAD)
-//            .itemMeta as SkullMeta
-//        val a = items.setOwningPlayer()
+        val key = NamespacedKey.minecraft("some_key")
+        val items = ItemStack(Material.PLAYER_HEAD).itemMeta
     }
 }
