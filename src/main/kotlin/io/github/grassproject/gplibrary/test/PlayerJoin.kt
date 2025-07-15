@@ -1,5 +1,6 @@
 package io.github.grassproject.gplibrary.test
 
+import io.github.grassproject.gplibrary.api.GPItem
 import io.github.grassproject.gplibrary.item.ItemBuilder
 import io.github.grassproject.gplibrary.util.get
 import io.github.grassproject.gplibrary.util.set
@@ -23,6 +24,8 @@ class PlayerJoin : Listener {
             Component.text("Value is: ${items[key, PersistentDataType.INTEGER] ?: "없음"}")
         )
 
+
+
     }
 
     companion object {
@@ -30,7 +33,7 @@ class PlayerJoin : Listener {
             // .setHideTooltip(true)
             .setItemName(Component.text("[GPLibrary]"))
             .setItemModel(NamespacedKey.minecraft("grass_block"))
-            .setId(ItemBuilder.ID_KEY,"grass_test_item")
+            .setId(GPItem.ITEM_ID,"grass_test_item")
             .setDamageResistant(
                 DamageTypeTags.IS_FIRE,
                 DamageTypeTags.IS_EXPLOSION
@@ -41,4 +44,6 @@ class PlayerJoin : Listener {
         val key = NamespacedKey.minecraft("some_key")
         val items = ItemStack(Material.PLAYER_HEAD).itemMeta
     }
+
+    fun get
 }

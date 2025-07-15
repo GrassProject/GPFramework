@@ -1,6 +1,7 @@
 package io.github.grassproject.gplibrary.item
 
 import io.github.grassproject.gplibrary.GPLibraryPlugin
+import io.github.grassproject.gplibrary.util.get
 import io.github.grassproject.gplibrary.util.set
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
@@ -22,11 +23,8 @@ import org.bukkit.inventory.meta.components.UseCooldownComponent
 import org.bukkit.persistence.PersistentDataType
 import java.util.function.Consumer
 
-class ItemBuilder(var itemStack: ItemStack) {
 
-    companion object {
-        val ID_KEY = NamespacedKey(GPLibraryPlugin.instance, "id")
-    }
+class ItemBuilder(var itemStack: ItemStack) {
 
     private var itemMeta: ItemMeta = itemStack.itemMeta
 
@@ -47,6 +45,11 @@ class ItemBuilder(var itemStack: ItemStack) {
         itemMeta[namespacedKey, persistentDataType] = value
         return this
     }
+
+    fun <T : Any, Z : Any> getPDC(
+        namespacedKey: NamespacedKey,
+        persistentDataType: PersistentDataType<T, Z>
+    ): Z? = itemMeta[namespacedKey, persistentDataType]
 
     fun modifierMeta(modifier: Consumer<ItemMeta>): ItemBuilder {
         modifier.accept(itemMeta)
