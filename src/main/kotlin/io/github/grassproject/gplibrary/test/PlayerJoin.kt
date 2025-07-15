@@ -30,7 +30,7 @@ class PlayerJoin : Listener {
             // .setHideTooltip(true)
             .setItemName(Component.text("[GPLibrary]"))
             .setItemModel(NamespacedKey.minecraft("grass_block"))
-            .setNamespacedKey(ItemBuilder.ID_KEY,"grass_test_item")
+            .setId(ItemBuilder.ID_KEY,"grass_test_item")
             .setDamageResistant(
                 DamageTypeTags.IS_FIRE,
                 DamageTypeTags.IS_EXPLOSION
