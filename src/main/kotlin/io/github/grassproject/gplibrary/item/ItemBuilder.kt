@@ -11,6 +11,7 @@ import org.bukkit.Tag
 import org.bukkit.damage.DamageType
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.inventory.ItemFlag
+import org.bukkit.inventory.ItemRarity
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.Damageable
 import org.bukkit.inventory.meta.ItemMeta
@@ -96,6 +97,11 @@ class ItemBuilder(var itemStack: ItemStack) {
 
     fun addEnchant(enchant: Enchantment, level: Int): ItemBuilder {
         itemMeta.addEnchant(enchant, level, true)
+        return this
+    }
+
+    fun setRarity(rarity: ItemRarity): ItemBuilder {
+        itemMeta.setRarity(rarity)
         return this
     }
 
