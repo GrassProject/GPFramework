@@ -1,5 +1,6 @@
 package io.github.grassproject.gplibrary.test
 
+import io.github.grassproject.gplibrary.GPLibraryPlugin
 import io.github.grassproject.gplibrary.api.GPItem
 import io.github.grassproject.gplibrary.item.ItemBuilder
 import io.github.grassproject.gplibrary.util.get
@@ -7,6 +8,7 @@ import io.github.grassproject.gplibrary.util.set
 import net.kyori.adventure.text.Component
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
+import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
@@ -19,13 +21,9 @@ class PlayerJoin : Listener {
     @EventHandler
     fun PlayerJoinEvent.on() {
         player.inventory.addItem(item)
-        items[key, PersistentDataType.INTEGER] = 100
-        player.sendMessage(
-            Component.text("Value is: ${items[key, PersistentDataType.INTEGER] ?: "없음"}")
-        )
+        player.sendMessage("id: ${GPItem.idFromItem(item)}")
 
-
-
+        test(player)
     }
 
     companion object {
@@ -41,9 +39,19 @@ class PlayerJoin : Listener {
             .setGlider(true)
             .build()
 
-        val key = NamespacedKey.minecraft("some_key")
-        val items = ItemStack(Material.PLAYER_HEAD).itemMeta
     }
 
-    fun get
+    fun test(player: Player) {
+        val items = ItemStack(Material.PLAYER_HEAD)
+        val meta = items.itemMeta
+
+        val key = NamespacedKey(GPLibraryPlugin.instance, "value")
+        meta.persistentDataContainer.set(key, PersistentDataType.INTEGER, 100)
+
+        items.itemMeta = meta
+        player.inventory.addItem(items)
+
+        val value = items.itemMeta?.persistentDataContainer?.get(key, PersistentDataType.INTEGER)
+        player.sendMessage(Component.text("Value is: ${value ?: "없음"}"))
+    }
 }

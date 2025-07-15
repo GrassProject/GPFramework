@@ -55,7 +55,7 @@ tasks.withType<ShadowJar> {
 //    }
 
     archiveFileName.set("${rootProject.name}-${rootProject.version}.jar")
-    destinationDirectory=file("C:\\Users\\aa990\\OneDrive\\바탕 화면\\GPServer\\plugins")
+    // destinationDirectory=file("C:\\Users\\aa990\\OneDrive\\바탕 화면\\GPServer\\plugins") //
 }
 
 tasks.processResources {
