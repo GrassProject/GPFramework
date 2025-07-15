@@ -1,6 +1,7 @@
 package io.github.grassproject.gplibrary.item
 
 import io.github.grassproject.gplibrary.GPLibraryPlugin
+import io.github.grassproject.gplibrary.util.set
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.format.TextDecoration
@@ -31,12 +32,17 @@ class ItemBuilder(var itemStack: ItemStack) {
 
     constructor(id: String) : this(ItemHandler.createItem(id))
 
-    fun setNamespacedKey(namespacedKey: NamespacedKey, id: String): ItemBuilder {
-        itemMeta.persistentDataContainer.set(
-            namespacedKey,
-            PersistentDataType.STRING,
-            id
-        )
+    fun setId(namespacedKey: NamespacedKey, id: String): ItemBuilder {
+        itemMeta[namespacedKey, PersistentDataType.STRING] = id
+        return this
+    }
+
+    fun <T : Any, Z : Any> setPDC(
+        namespacedKey: NamespacedKey,
+        persistentDataType: PersistentDataType<T, Z>,
+        value: Z
+    ): ItemBuilder {
+        itemMeta[namespacedKey, persistentDataType] = value
         return this
     }
 
