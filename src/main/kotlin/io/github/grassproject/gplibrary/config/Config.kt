@@ -23,7 +23,11 @@ class Config(private val plugin: JavaPlugin) {
     fun setValue(file: File, configPath: String, value: Any) {
         val config = YamlConfiguration.loadConfiguration(file)
         config.set(configPath, value)
-        config.save(file)
+        try {
+            config.save(file)
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
     }
 
     fun create(path: String): Boolean = create(File(plugin.dataFolder, path))
