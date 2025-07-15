@@ -5,7 +5,7 @@ import org.bukkit.event.Listener
 import org.bukkit.plugin.java.JavaPlugin
 import java.util.*
 
-data class Register(val plugin: JavaPlugin) {
+class Register(val plugin: JavaPlugin) {
 
     fun resistEventListener(listener: Listener): Register {
         plugin.server.pluginManager.registerEvents(listener, plugin)

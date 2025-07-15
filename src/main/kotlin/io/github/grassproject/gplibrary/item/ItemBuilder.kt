@@ -19,6 +19,7 @@ import org.bukkit.inventory.meta.components.FoodComponent
 import org.bukkit.inventory.meta.components.ToolComponent
 import org.bukkit.inventory.meta.components.UseCooldownComponent
 import org.bukkit.persistence.PersistentDataType
+import java.util.function.Consumer
 
 class ItemBuilder(var itemStack: ItemStack) {
 
@@ -46,6 +47,11 @@ class ItemBuilder(var itemStack: ItemStack) {
         return this
     }
 
+    fun modifierMeta(modifier: Consumer<ItemMeta>): ItemBuilder {
+        modifier.accept(itemMeta)
+        return this
+    }
+
     fun setType(type: Material): ItemBuilder {
         itemStack = ItemStack(type)
         return this
@@ -62,14 +68,18 @@ class ItemBuilder(var itemStack: ItemStack) {
     }
 
     fun setItemName(itemName: Component): ItemBuilder {
-        val styledName = itemName.decorationIfAbsent(TextDecoration.ITALIC, TextDecoration.State.FALSE)
-            .colorIfAbsent(NamedTextColor.WHITE)
+        val styledName = itemName.decorationIfAbsent(
+            TextDecoration.ITALIC,
+            TextDecoration.State.FALSE
+        ).colorIfAbsent(NamedTextColor.WHITE)
         itemMeta.itemName(styledName)
         return this
     }
 
     fun setLore(lore: List<Component>): ItemBuilder {
-        val styledLore = lore.map { it.decorationIfAbsent(TextDecoration.ITALIC, TextDecoration.State.FALSE) }
+        val styledLore = lore.map { it.decorationIfAbsent(
+                TextDecoration.ITALIC, TextDecoration.State.FALSE
+            ) }
         itemMeta.lore(styledLore)
         return this
     }
