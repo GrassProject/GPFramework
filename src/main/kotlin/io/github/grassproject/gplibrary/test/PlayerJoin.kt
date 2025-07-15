@@ -3,8 +3,6 @@ package io.github.grassproject.gplibrary.test
 import io.github.grassproject.gplibrary.GPLibraryPlugin
 import io.github.grassproject.gplibrary.api.GPItem
 import io.github.grassproject.gplibrary.item.ItemBuilder
-import io.github.grassproject.gplibrary.util.get
-import io.github.grassproject.gplibrary.util.set
 import net.kyori.adventure.text.Component
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
@@ -24,6 +22,7 @@ class PlayerJoin : Listener {
         player.sendMessage("id: ${GPItem.idFromItem(item)}")
 
         test(player)
+
     }
 
     companion object {

@@ -1,5 +1,6 @@
 package io.github.grassproject.gplibrary
 
+import io.github.grassproject.gplibrary.config.Config
 import io.github.grassproject.gplibrary.util.Register
 import io.github.grassproject.gplibrary.test.PlayerJoin
 import org.bukkit.plugin.java.JavaPlugin
@@ -15,5 +16,8 @@ class GPLibraryPlugin : JavaPlugin() {
         instance = this
 
         Register(this).resistEventListener(PlayerJoin())
+
+//        val success1 = Config(this).create("data/example.yml")
+//        println("example.yml 파일 생성 성공? $success1")
     }
 }
