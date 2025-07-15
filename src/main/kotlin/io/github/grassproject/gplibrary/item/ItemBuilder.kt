@@ -21,7 +21,8 @@ import org.bukkit.inventory.meta.components.FoodComponent
 import org.bukkit.inventory.meta.components.ToolComponent
 import org.bukkit.inventory.meta.components.UseCooldownComponent
 import org.bukkit.persistence.PersistentDataType
-import java.util.function.Consumer
+import kotlin.collections.toMutableSet
+import kotlin.collections.mutableSetOf
 
 
 class ItemBuilder(var itemStack: ItemStack) {
@@ -51,10 +52,10 @@ class ItemBuilder(var itemStack: ItemStack) {
         persistentDataType: PersistentDataType<T, Z>
     ): Z? = itemMeta[namespacedKey, persistentDataType]
 
-    fun modifierMeta(modifier: Consumer<ItemMeta>): ItemBuilder {
-        modifier.accept(itemMeta)
-        return this
-    }
+//    fun modifierMeta(modifier: Consumer<ItemMeta>): ItemBuilder {
+//        modifier.accept(itemMeta)
+//        return this
+//    }
 
     fun setType(type: Material): ItemBuilder {
         itemStack = ItemStack(type)
@@ -156,7 +157,6 @@ class ItemBuilder(var itemStack: ItemStack) {
     }
 
     // 1_21_2 +
-    @Deprecated("임시")
     fun setUseCooldownComponent(useCooldownComponent: UseCooldownComponent): ItemBuilder {
         itemMeta.setUseCooldown(useCooldownComponent)
         return this
@@ -177,7 +177,7 @@ class ItemBuilder(var itemStack: ItemStack) {
         return this
     }
 
-    @Deprecated("임시")
+    // @Deprecated("임시")
     fun setEquippable(equippableComponent: EquippableComponent): ItemBuilder {
         itemMeta.setEquippable(equippableComponent)
         return this
@@ -187,6 +187,13 @@ class ItemBuilder(var itemStack: ItemStack) {
         damageResistant.forEach { itemMeta.damageResistant = it }
         return this
     }
+
+//    fun addDamageResistant(vararg damageResistant: Tag<DamageType>): ItemBuilder {
+//        val current = itemMeta.damageResistant?.toMutableSet() ?: mutableSetOf()
+//        current.addAll(damageResistant)
+//        itemMeta.damageResistant = current
+//        return this
+//    }
 
     fun setGlider(glider: Boolean): ItemBuilder {
         itemMeta.isGlider = glider
