@@ -144,13 +144,20 @@ class ItemParser(private val section: ConfigurationSection) {
 //        }
 
         // @Deprecated("단일값만 적용됨")
-        section.getStringList("damage_resistant")
-            .mapNotNull { tagName -> DamageTypeTagRegistry.getTag(tagName) }
-            .takeIf { it.isNotEmpty() }?.let {
-                item.setDamageResistant(*it.toTypedArray())
-                println("itA: ${it.toTypedArray().joinToString()}")
-                println("it: $it")
+//        section.getStringList("damage_resistant")
+//            .mapNotNull { tagName -> DamageTypeTagRegistry.getTag(tagName) }
+//            .takeIf { it.isNotEmpty() }?.let {
+//                item.setDamageResistant(*it.toTypedArray())
+//                println("itA: ${it.toTypedArray().joinToString()}")
+//                println("it: $it")
+//            }
+
+        // TODO 임시 단일
+        section.getString("damage_resistant")?.let { tagName ->
+            DamageTypeTagRegistry.getTag(tagName)?.let { tag ->
+                item.setDamageResistant(tag)
             }
+        }
 
         section.getBoolean("Glider", false).let { item.setGlider(it) }
 
