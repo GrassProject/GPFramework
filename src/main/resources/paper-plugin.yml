@@ -6,7 +6,7 @@ version: '${version}'
 api-version: '1.21'
 author: GrassProject
 description: PluginLibrary
-# load: STARTUP
+load: STARTUP
 dependencies:
   server:
     Vault:
