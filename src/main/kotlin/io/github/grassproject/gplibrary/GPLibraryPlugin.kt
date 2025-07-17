@@ -3,6 +3,7 @@ package io.github.grassproject.gplibrary
 import io.github.grassproject.gplibrary.config.Config
 import io.github.grassproject.gplibrary.listener.InventoryListener
 import io.github.grassproject.gplibrary.util.Register
+import io.github.grassproject.gplibrary.util.register
 // import io.github.grassproject.gplibrary.test.PlayerJoin
 import org.bukkit.plugin.java.JavaPlugin
 import java.io.File
@@ -17,7 +18,8 @@ class GPLibraryPlugin : JavaPlugin() {
     override fun onEnable() {
         instance = this
 
-        Register(this).resistEventListener(InventoryListener())
+        // Register(this).resistEventListener(InventoryListener())
+        InventoryListener().register()
 
         // Register(this).resistEventListener(PlayerJoin())
 
