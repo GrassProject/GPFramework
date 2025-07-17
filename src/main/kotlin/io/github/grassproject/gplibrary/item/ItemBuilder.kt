@@ -1,8 +1,8 @@
 package io.github.grassproject.gplibrary.item
 
 import io.github.grassproject.gplibrary.GPLibraryPlugin
-import io.github.grassproject.gplibrary.util.get
-import io.github.grassproject.gplibrary.util.set
+import io.github.grassproject.gplibrary.util.pdc.get
+import io.github.grassproject.gplibrary.util.pdc.set
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.format.TextDecoration
@@ -21,8 +21,6 @@ import org.bukkit.inventory.meta.components.FoodComponent
 import org.bukkit.inventory.meta.components.ToolComponent
 import org.bukkit.inventory.meta.components.UseCooldownComponent
 import org.bukkit.persistence.PersistentDataType
-import kotlin.collections.toMutableSet
-import kotlin.collections.mutableSetOf
 
 
 class ItemBuilder(var itemStack: ItemStack) {

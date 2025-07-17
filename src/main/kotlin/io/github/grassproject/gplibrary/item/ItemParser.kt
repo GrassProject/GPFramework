@@ -1,8 +1,7 @@
 package io.github.grassproject.gplibrary.item
 
 import io.github.grassproject.gplibrary.item.util.DamageTypeTagRegistry
-import io.github.grassproject.gplibrary.util.VersionUtil
-import io.github.grassproject.gplibrary.util.toMiniMessage
+import io.github.grassproject.gplibrary.util.component.toMiniMessage
 import io.papermc.paper.registry.RegistryAccess
 import io.papermc.paper.registry.RegistryKey
 import org.bukkit.Bukkit
@@ -10,12 +9,10 @@ import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.Tag
 import org.bukkit.configuration.ConfigurationSection
-import org.bukkit.damage.DamageType
 import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemRarity
 import org.bukkit.inventory.ItemStack
-import org.bukkit.tag.DamageTypeTags
 
 class ItemParser(private val section: ConfigurationSection) {
 

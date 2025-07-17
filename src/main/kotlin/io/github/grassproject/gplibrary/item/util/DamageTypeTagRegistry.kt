@@ -31,7 +31,7 @@ object DamageTypeTagRegistry {
         "IS_LIGHTNING" to DamageTypeTags.IS_LIGHTNING,
         "IS_PLAYER_ATTACK" to DamageTypeTags.IS_PLAYER_ATTACK,
         "IS_PROJECTILE" to DamageTypeTags.IS_PROJECTILE,
-        // "MACE_SMASH" to DamageTypeTags.MACE_SMASH, TODO 1.21.4에 없음
+        // TODO 1.21.4에 없음
         "NO_ANGER" to DamageTypeTags.NO_ANGER,
         "NO_IMPACT" to DamageTypeTags.NO_IMPACT,
         "NO_KNOCKBACK" to DamageTypeTags.NO_KNOCKBACK,
@@ -39,7 +39,11 @@ object DamageTypeTagRegistry {
         "PANIC_ENVIRONMENTAL_CAUSES" to DamageTypeTags.PANIC_ENVIRONMENTAL_CAUSES,
         "WITCH_RESISTANT_TO" to DamageTypeTags.WITCH_RESISTANT_TO,
         "WITHER_IMMUNE_TO" to DamageTypeTags.WITHER_IMMUNE_TO,
-    )
+    ).toMutableMap().apply {
+        if (VersionUtil.isVersionAtOrAbove("1.21.4")) {
+            put("MACE_SMASH", DamageTypeTags.MACE_SMASH)
+        }
+    }
 
     fun getTag(name: String): Tag<DamageType>? {
         return damageTypeTagMap[name.uppercase()]
