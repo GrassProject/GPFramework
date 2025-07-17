@@ -10,25 +10,34 @@ import java.util.Objects
 
 class Register(val plugin: JavaPlugin) {
 
-    fun resistEventListener(listener: Listener): Register {
+    @Deprecated("EventExt.kt (Listener.register())")
+    fun resisterEventListener(listener: Listener): Register {
         plugin.server.pluginManager.registerEvents(listener, plugin)
         return this
     }
 
-    fun resistCommandExecutor(command: String, executor: CommandExecutor?): Register {
-        Objects.requireNonNull<PluginCommand>(plugin.getCommand(command)).setExecutor(executor)
+    fun registerCommandExecutor(command: String, executor: CommandExecutor): Register {
+        val cmd: PluginCommand = requireNotNull(plugin.getCommand(command)) {
+            "Command '$command' not found in plugin.yml"
+        }
+        cmd.setExecutor(executor)
         return this
     }
 
-    fun resistTabCompleter(command: String, completer: TabCompleter?): Register {
-        Objects.requireNonNull<PluginCommand>(plugin.getCommand(command)).tabCompleter = completer
+    fun registerTabCompleter(command: String, completer: TabCompleter): Register {
+        val cmd: PluginCommand = requireNotNull(plugin.getCommand(command)) {
+            "Command '$command' not found in plugin.yml"
+        }
+        cmd.tabCompleter = completer
         return this
     }
 
-    fun resistTabExecutor(command: String, executor: TabExecutor?): Register {
-        Objects.requireNonNull<PluginCommand>(plugin.getCommand(command)).setExecutor(executor)
-        Objects.requireNonNull<PluginCommand>(plugin.getCommand(command)).tabCompleter = executor
+    fun registerTabExecutor(command: String, executor: TabExecutor): Register {
+        val cmd: PluginCommand = requireNotNull(plugin.getCommand(command)) {
+            "Command '$command' not found in plugin.yml"
+        }
+        cmd.setExecutor(executor)
+        cmd.tabCompleter = executor
         return this
     }
-
 }
