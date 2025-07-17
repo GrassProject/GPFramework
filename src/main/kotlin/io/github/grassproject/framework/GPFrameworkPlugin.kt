@@ -1,5 +1,6 @@
 package io.github.grassproject.framework
 
+import com.nexomc.nexo.glyphs.RequiredGlyph.id
 import io.github.grassproject.framework.api.test.GPPlugin
 
 class GPFrameworkPlugin : GPPlugin() {
@@ -13,7 +14,9 @@ class GPFrameworkPlugin : GPPlugin() {
         instance = this
     }
 
-    override fun enable() {}
+    override fun enable() {
+        setupBStats(26535)
+    }
 
     override fun disable() {}
 
