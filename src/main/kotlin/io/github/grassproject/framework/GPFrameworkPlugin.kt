@@ -1,6 +1,5 @@
 package io.github.grassproject.framework
 
-import com.nexomc.nexo.glyphs.RequiredGlyph.id
 import io.github.grassproject.framework.api.test.GPPlugin
 
 class GPFrameworkPlugin : GPPlugin() {
