@@ -10,6 +10,7 @@ enum class MinecraftVersion(val versionString: String) {
     V1_20_5("1.20.5"),
     V1_20_6("1.20.6"),
     V1_21("1.21.0"),
+    V1_21_2("1.21.2"),
     V1_21_1("1.21.1"),
     V1_21_4("1.21.4");
 

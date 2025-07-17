@@ -1,6 +1,7 @@
 package io.github.grassproject.gplibrary.item
 
 import io.github.grassproject.gplibrary.GPLibraryPlugin
+import io.github.grassproject.gplibrary.util.bukkit.MinecraftVersion
 import io.github.grassproject.gplibrary.util.pdc.get
 import io.github.grassproject.gplibrary.util.pdc.set
 import net.kyori.adventure.text.Component
@@ -109,7 +110,7 @@ class ItemBuilder(var itemStack: ItemStack) {
 
     // 커모델은 차후 지정
 
-    // 1_21_5 +
+    // V1_20_5 +
     fun setHideTooltip(hideTooltip: Boolean): ItemBuilder {
         itemMeta.isHideTooltip = hideTooltip
         return this
@@ -154,34 +155,40 @@ class ItemBuilder(var itemStack: ItemStack) {
         return this
     }
 
-    // 1_21_2 +
+    // V1_21_2 +
     fun setUseCooldownComponent(useCooldownComponent: UseCooldownComponent): ItemBuilder {
+        if (!MinecraftVersion.V1_21_2.isAbove()) return this
         itemMeta.setUseCooldown(useCooldownComponent)
         return this
     }
 
     fun setTooltipStyle(tooltipStyle: NamespacedKey): ItemBuilder {
+        if (!MinecraftVersion.V1_21_2.isAbove()) return this
         itemMeta.tooltipStyle = tooltipStyle
         return this
     }
 
     fun setItemModel(itemModel: NamespacedKey): ItemBuilder {
+        if (!MinecraftVersion.V1_21_2.isAbove()) return this
         itemMeta.itemModel = itemModel
         return this
     }
 
     fun setEnchantable(enchantable: Int): ItemBuilder {
+        if (!MinecraftVersion.V1_21_2.isAbove()) return this
         itemMeta.setEnchantable(enchantable)
         return this
     }
 
     // @Deprecated("임시")
     fun setEquippable(equippableComponent: EquippableComponent): ItemBuilder {
+        if (!MinecraftVersion.V1_21_2.isAbove()) return this
         itemMeta.setEquippable(equippableComponent)
         return this
     }
 
     fun setDamageResistant(vararg damageResistant: Tag<DamageType>): ItemBuilder {
+        if (!MinecraftVersion.V1_21_2.isAbove()) return this
         damageResistant.forEach { itemMeta.damageResistant = it }
         return this
     }
@@ -194,6 +201,7 @@ class ItemBuilder(var itemStack: ItemStack) {
 //    }
 
     fun setGlider(glider: Boolean): ItemBuilder {
+        if (!MinecraftVersion.V1_21_2.isAbove()) return this
         itemMeta.isGlider = glider
         return this
     }

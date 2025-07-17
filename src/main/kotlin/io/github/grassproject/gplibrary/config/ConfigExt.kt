@@ -3,6 +3,7 @@ package io.github.grassproject.gplibrary.config
 import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.configuration.MemoryConfiguration
 import org.bukkit.configuration.file.FileConfiguration
+import org.bukkit.configuration.file.YamlConfiguration
 
 fun ConfigurationSection.keysForEach(path: String, boolean: Boolean, function: (String) -> Unit) {
     val section = getConfigurationSection(path) ?: return
@@ -63,3 +64,33 @@ fun FileConfiguration.getFloat(path: String, def: Float = 0.0f): Float =
 
 fun FileConfiguration.toSection(path: String): ConfigurationSection? =
     this.getConfigurationSection(path)
+
+fun ConfigurationSection.getStringListOrEmpty(path: String): List<String> =
+    this.getStringList(path).ifEmpty { emptyList() }
+
+fun ConfigurationSection.getIntListOrEmpty(path: String): List<Int> =
+    this.getIntegerList(path).ifEmpty { emptyList() }
+
+fun ConfigurationSection.forEachSection(path: String, action: (ConfigurationSection) -> Unit) {
+    val section = this.getConfigurationSection(path) ?: return
+    for (key in section.getKeys(false)) {
+        section.getConfigurationSection(key)?.let(action)
+    }
+}
+
+inline fun <reified T : Enum<T>> FileConfiguration.getEnumList(path: String): List<T> {
+    return getStringList(path).mapNotNull { raw ->
+        enumValues<T>().firstOrNull { it.name.equals(raw, ignoreCase = true) }
+    }
+}
+
+@Suppress("UNCHECKED_CAST")
+fun ConfigurationSection.getMap(path: String): Map<String, Any> {
+    return this.getConfigurationSection(path)?.getValues(false) ?: emptyMap()
+}
+
+fun YamlConfiguration.copyFrom(other: YamlConfiguration) {
+    other.getKeys(true).forEach { key ->
+        this.set(key, other.get(key))
+    }
+}

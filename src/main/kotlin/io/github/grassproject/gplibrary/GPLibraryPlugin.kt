@@ -1,33 +1,33 @@
 package io.github.grassproject.gplibrary
 
 import io.github.grassproject.gplibrary.config.Config
+import io.github.grassproject.gplibrary.config.IConfig
 import io.github.grassproject.gplibrary.listener.InventoryListener
-import io.github.grassproject.gplibrary.util.Register
 import io.github.grassproject.gplibrary.util.register
-// import io.github.grassproject.gplibrary.test.PlayerJoin
+import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.plugin.java.JavaPlugin
-import java.io.File
 
-class GPLibraryPlugin : JavaPlugin() {
+class GPLibraryPlugin : JavaPlugin(), IConfig {
 
     companion object {
         lateinit var instance: GPLibraryPlugin
             private set
     }
 
-    override fun onEnable() {
+    override val configManager: Config by lazy { Config(this) }
+    override val configYaml: YamlConfiguration
+        get() = configManager.loadYaml("config.yml")
+
+    override fun onLoad() {
         instance = this
+    }
 
-        // Register(this).resistEventListener(InventoryListener())
+    override fun onEnable() {
+        setupConfig()
         InventoryListener().register()
+    }
 
-        // Register(this).resistEventListener(PlayerJoin())
-
-//        val config = Config(this)
-//        val success1 = config.create("data/example.yml")
-//        println("example.yml 파일 생성 성공? $success1")
-//
-//        config.setValue("data/example.yml", "test", 1)
-
+    private fun setupConfig() {
+        configManager.createFromResource("config.yml")
     }
 }

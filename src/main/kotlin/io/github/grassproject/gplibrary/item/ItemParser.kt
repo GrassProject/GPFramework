@@ -1,6 +1,7 @@
 package io.github.grassproject.gplibrary.item
 
 import io.github.grassproject.gplibrary.item.util.DamageTypeTagRegistry
+import io.github.grassproject.gplibrary.util.bukkit.MinecraftVersion
 import io.github.grassproject.gplibrary.util.component.toMiniMessage
 import io.papermc.paper.registry.RegistryAccess
 import io.papermc.paper.registry.RegistryKey
@@ -85,7 +86,7 @@ class ItemParser(private val section: ConfigurationSection) {
             parseEquippableComponent(item, equippedSection)
         }
 
-        if (!VersionUtil.isVersionAtOrAbove("1.21.2")) return
+        if (!MinecraftVersion.V1_21_2.isAbove()) return
 
         components.getConfigurationSection("use_cooldown")?.let {
             runCatching {
