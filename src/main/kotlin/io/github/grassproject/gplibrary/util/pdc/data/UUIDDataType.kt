@@ -1,8 +1,6 @@
-package io.github.grassproject.gplibrary.util
+package io.github.grassproject.gplibrary.util.pdc.data
 
-import org.bukkit.NamespacedKey
 import org.bukkit.persistence.PersistentDataAdapterContext
-import org.bukkit.persistence.PersistentDataHolder
 import org.bukkit.persistence.PersistentDataType
 import java.nio.ByteBuffer
 import java.util.UUID
@@ -21,23 +19,4 @@ object UUIDDataType : PersistentDataType<ByteArray, UUID> {
         val buffer = ByteBuffer.wrap(primitive)
         return UUID(buffer.long, buffer.long)
     }
-}
-
-operator fun <T : Any, Z : Any> PersistentDataHolder.get(
-    key: NamespacedKey,
-    type: PersistentDataType<T, Z>
-): Z? = persistentDataContainer.takeIf { it.has(key, type) }?.get(key, type)
-
-operator fun <T : Any, Z : Any> PersistentDataHolder.set(
-    key: NamespacedKey,
-    type: PersistentDataType<T, Z>,
-    value: Z?
-) {
-    val container = persistentDataContainer
-    if (value == null) container.remove(key)
-    else container.set(key, type, value)
-}
-
-fun PersistentDataHolder.remove(key: NamespacedKey) {
-    persistentDataContainer.remove(key)
 }
