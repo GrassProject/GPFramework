@@ -1,4 +1,4 @@
-package io.github.grassproject.gplibrary.util
+package io.github.grassproject.gplibrary.util.bukkit
 
 import org.bukkit.Bukkit
 
