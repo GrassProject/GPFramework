@@ -6,7 +6,7 @@ import org.bukkit.event.inventory.InventoryCloseEvent
 import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.InventoryHolder
 
-interface GPInventory : InventoryHolder {
+interface IGPInventory : InventoryHolder {
     fun manageClick(event: InventoryClickEvent)
     fun manageClose(event: InventoryCloseEvent)
     fun init()

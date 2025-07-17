@@ -1,5 +1,6 @@
-package io.github.grassproject.gplibrary.inventory
+package io.github.grassproject.gplibrary.inventory.trash
 
+import io.github.grassproject.gplibrary.inventory.IGPInventory
 import io.github.grassproject.gplibrary.item.ItemParser
 import io.github.grassproject.gplibrary.util.component.toMiniMessage
 import org.bukkit.Bukkit
@@ -14,7 +15,7 @@ class InventoryPagesParser(
     private val pagesLayout: List<List<String>>,
     private val pagesItemMap: List<Map<String, InventoryActionItem>>,
     private val placeholder: (String) -> String = { it }
-) : GPInventory {
+) : IGPInventory {
 
     private var viewer: Player? = null
     private var currentPage: Int = 0

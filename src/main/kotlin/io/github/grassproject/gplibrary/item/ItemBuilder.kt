@@ -23,7 +23,6 @@ import org.bukkit.inventory.meta.components.ToolComponent
 import org.bukkit.inventory.meta.components.UseCooldownComponent
 import org.bukkit.persistence.PersistentDataType
 
-
 class ItemBuilder(var itemStack: ItemStack) {
 
     private var itemMeta: ItemMeta = itemStack.itemMeta
@@ -190,6 +189,7 @@ class ItemBuilder(var itemStack: ItemStack) {
     fun setDamageResistant(vararg damageResistant: Tag<DamageType>): ItemBuilder {
         if (!MinecraftVersion.V1_21_2.isAbove()) return this
         damageResistant.forEach { itemMeta.damageResistant = it }
+        // itemMeta.damageResistant = (itemMeta.damageResistant + damageResistant).toSet()
         return this
     }
 

@@ -1,4 +1,4 @@
-package io.github.grassproject.gplibrary.inventory
+package io.github.grassproject.gplibrary.inventory.trash
 
 import io.github.grassproject.gplibrary.item.ItemParser
 import io.github.grassproject.gplibrary.util.component.toMiniMessage

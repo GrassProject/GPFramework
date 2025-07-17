@@ -157,6 +157,14 @@ class ItemParser(private val section: ConfigurationSection) {
             }
         }
 
+        section.getStringList("damage_resistant")
+            .mapNotNull { tagName -> DamageTypeTagRegistry.getTag(tagName) }
+            .takeIf { it.isNotEmpty() }?.let {
+                item.setDamageResistant(*it.toTypedArray())
+                println("itA: ${it.toTypedArray().joinToString()}")
+                println("it: $it")
+            }
+
         section.getBoolean("Glider", false).let { item.setGlider(it) }
 
         section.getInt("max_stack_size", 64).let { item.setMaxStackSize(it) }
