@@ -1,7 +1,7 @@
 package io.github.grassproject.gplibrary.inventory
 
 import io.github.grassproject.gplibrary.item.ItemParser
-import io.github.grassproject.gplibrary.util.toMiniMessage
+import io.github.grassproject.gplibrary.util.component.toMiniMessage
 import org.bukkit.Bukkit
 import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.entity.Player
