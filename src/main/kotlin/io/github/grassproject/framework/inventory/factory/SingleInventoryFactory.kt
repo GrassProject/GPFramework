@@ -16,17 +16,17 @@ class SingleInventoryFactory(
 ) : IGPInventory {
 
     private var viewer: Player? = null
-    private val inventory: Inventory by lazy {
+    private val builtInventory: Inventory by lazy {
         InventoryLayoutBuilder.build(this, title, layout, itemMap, placeholder)
     }
 
     override fun getViewer(): Player? = viewer
 
-    override fun getInventory(): Inventory = inventory
+    override fun getInventory(): Inventory = builtInventory
 
     override fun open(player: Player) {
         viewer = player
-        player.openInventory(inventory)
+        player.openInventory(builtInventory)
     }
 
     override fun init() {}

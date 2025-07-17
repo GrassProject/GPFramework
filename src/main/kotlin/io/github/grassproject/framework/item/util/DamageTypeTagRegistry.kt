@@ -1,5 +1,6 @@
 package io.github.grassproject.framework.item.util
 
+import io.github.grassproject.framework.util.bukkit.MinecraftVersion
 import org.bukkit.Tag
 import org.bukkit.damage.DamageType
 import org.bukkit.tag.DamageTypeTags
@@ -40,7 +41,7 @@ object DamageTypeTagRegistry {
         "WITCH_RESISTANT_TO" to DamageTypeTags.WITCH_RESISTANT_TO,
         "WITHER_IMMUNE_TO" to DamageTypeTags.WITHER_IMMUNE_TO,
     ).toMutableMap().apply {
-        if (VersionUtil.isVersionAtOrAbove("1.21.4")) {
+        if (MinecraftVersion.V1_21_4.isAtOrAbove()) {
             put("MACE_SMASH", DamageTypeTags.MACE_SMASH)
         }
     }

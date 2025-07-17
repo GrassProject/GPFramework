@@ -7,7 +7,7 @@ interface IGPPlugin {
     val configManager: Config
     val configYaml: YamlConfiguration
 
+    fun load()
     fun enable()
     fun disable()
-    fun reload()
 }
