@@ -1,11 +1,11 @@
-name: GPLibrary
-main: io.github.grassproject.gplibrary.GPLibraryPlugin
-bootstrapper: io.github.grassproject.gplibrary.GPLibraryBootstrap
-loader: io.github.grassproject.gplibrary.GPLibraryLoader
+name: GPFramework
+main: io.github.grassproject.framework.GPFrameworkPlugin
+bootstrapper: io.github.grassproject.framework.GPFrameworkBootstrap
+loader: io.github.grassproject.framework.GPFrameworkLoader
 version: '${version}'
 api-version: '1.21'
 author: GrassProject
-description: PluginLibrary
+description: PluginFramework
 load: STARTUP
 dependencies:
   server:

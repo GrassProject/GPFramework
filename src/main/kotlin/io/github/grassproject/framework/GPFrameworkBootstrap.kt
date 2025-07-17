@@ -1,0 +1,12 @@
+package io.github.grassproject.framework
+
+import io.papermc.paper.plugin.bootstrap.BootstrapContext
+import io.papermc.paper.plugin.bootstrap.PluginBootstrap
+
+class GPFrameworkBootstrap : PluginBootstrap {
+    override fun bootstrap(context: BootstrapContext) {}
+
+//    override fun createPlugin(context: PluginProviderContext): JavaPlugin {
+//        return GPLibraryPlugin("")
+//    }
+}

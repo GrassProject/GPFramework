@@ -1,9 +1,9 @@
-name: GPLibrary
-main: io.github.grassproject.gplibrary.GPLibraryPlugin
+name: GPFramework
+main: io.github.grassproject.framework.GPFrameworkPlugin
 version: '${version}'
 api-version: '1.21'
 author: GrassProject
-description: PluginLibrary
+description: PluginFramework
 load: STARTUP
 libraries:
   - org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.1.21
