@@ -11,6 +11,7 @@ fun Player.sendMessage(adventure: BukkitAudiences, message: String) =
 fun Player.sendMessage(adventure: BukkitAudiences, message: Component) =
     adventure.player(this).sendMessage(message)
 
+/*
 fun Player.sendMessage(adventure: BukkitAudiences, builder: () -> List<Component>) =
     builder().forEach { msg ->
         this.sendMessage(adventure, msg)
@@ -20,4 +21,4 @@ fun Player.sendMessages(adventure: BukkitAudiences, builder: () -> List<String>)
     builder().forEach { msg ->
         this.sendMessage(adventure, msg.toMiniMessage())
     }
-}
+}*/
