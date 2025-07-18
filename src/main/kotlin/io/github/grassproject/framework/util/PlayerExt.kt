@@ -5,14 +5,19 @@ import net.kyori.adventure.platform.bukkit.BukkitAudiences
 import net.kyori.adventure.text.Component
 import org.bukkit.entity.Player
 
-fun Player.sendStringMessage(adventure: BukkitAudiences, message: String) =
+fun Player.sendMessage(adventure: BukkitAudiences, message: String) =
     adventure.player(this).sendMessage(message.toMiniMessage())
 
 fun Player.sendMessage(adventure: BukkitAudiences, message: Component) =
     adventure.player(this).sendMessage(message)
 
-fun Player.sendStringMessage(adventure: BukkitAudiences, builder: () -> Component) =
-    this.sendMessage(adventure, builder())
+fun Player.sendMessage(adventure: BukkitAudiences, builder: () -> List<Component>) =
+    builder().forEach { msg ->
+        this.sendMessage(adventure, msg)
+    }
 
-fun Player.sendMessage(adventure: BukkitAudiences, builder: () -> String) =
-    this.sendMessage(adventure, builder().toMiniMessage())
+fun Player.sendMessages(adventure: BukkitAudiences, builder: () -> List<String>) {
+    builder().forEach { msg ->
+        this.sendMessage(adventure, msg.toMiniMessage())
+    }
+}
