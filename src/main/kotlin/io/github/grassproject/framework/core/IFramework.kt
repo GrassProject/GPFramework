@@ -3,6 +3,8 @@ package io.github.grassproject.framework.core
 import io.github.grassproject.framework.core.command.GPCommand
 import io.github.grassproject.framework.core.listener.GPListener
 import org.bukkit.Bukkit
+import org.bukkit.permissions.Permission
+import org.bukkit.permissions.PermissionDefault
 import org.slf4j.LoggerFactory
 
 interface IFramework {
@@ -18,6 +20,7 @@ interface IFramework {
 
     fun registerEvent(listener: GPListener<out GPPlugin>)
     fun registerCommand(command: GPCommand<out GPPlugin>, reload: Boolean)
+    fun registerPermission(permission: String, permissionDefault: PermissionDefault)
 }
 
 object Framework : IFramework {
@@ -54,5 +57,10 @@ object Framework : IFramework {
     override fun registerCommand(command: GPCommand<out GPPlugin>, reload: Boolean) {
         // TODO command#sub#ReloadCommand.kr
     }
+
+    override fun registerPermission(permission: String, permissionDefault: PermissionDefault) {
+        Bukkit.getPluginManager().addPermission(Permission(permission, permissionDefault))
+    }
+
 
 }

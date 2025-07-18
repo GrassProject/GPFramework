@@ -26,6 +26,7 @@ dependencies {
         include("*.jar")
     })
 
+    implementation("net.kyori:adventure-platform-bukkit:4.4.0")
     implementation("org.bstats:bstats-bukkit:3.0.2")
 
     testImplementation(kotlin("test"))
@@ -49,6 +50,7 @@ tasks.withType<ShadowJar> {
     // exclude("META-INF/**")
 
     relocate("org.bstats", "io.github.grassproject.framework.lib.bstats")
+    relocate("net.kyori", "io.github.grassproject.framework.lib.kyori")
 //    relocate("dev.jorel.commandapi", "com.github.soldam.lib.commandapi")
 //
 //    manifest {

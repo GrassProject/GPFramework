@@ -3,9 +3,11 @@ package io.github.grassproject.framework.core
 import io.github.grassproject.framework.core.command.GPCommand
 import io.github.grassproject.framework.core.listener.GPListener
 import io.github.grassproject.framework.util.bukkit.MinecraftVersion
+import net.kyori.adventure.platform.bukkit.BukkitAudiences
 import org.bstats.bukkit.Metrics
 import org.bukkit.Bukkit
 import org.bukkit.event.HandlerList
+import org.bukkit.permissions.PermissionDefault
 import org.bukkit.plugin.java.JavaPlugin
 
 abstract class GPPlugin : JavaPlugin() {
@@ -20,10 +22,13 @@ abstract class GPPlugin : JavaPlugin() {
 //    }
 
     private val listeners = mutableSetOf<GPListener<out GPPlugin>>()
+    private val commands = mutableSetOf<GPCommand<out GPPlugin>>()
 
     lateinit var framework: IFramework
         private set
     lateinit var plugin: GPPlugin
+        private set
+    lateinit var adventure: BukkitAudiences
         private set
 
     override fun onLoad() {
@@ -37,9 +42,14 @@ abstract class GPPlugin : JavaPlugin() {
             server.pluginManager.disablePlugin(this)
             return
         }
+
         plugin = this
-        framework.loadPlugin(this)
+        adventure = BukkitAudiences.create(this)
+
+        registerPermission("${plugin.name}.reload", PermissionDefault.OP)
+
         enable()
+        framework.loadPlugin(this)
     }
 
     override fun onDisable() {
@@ -58,6 +68,15 @@ abstract class GPPlugin : JavaPlugin() {
 
     fun unregisterEvents() {
         HandlerList.getHandlerLists().forEach { it.unregister(this) }
+    }
+
+    protected fun registerCommand(command: GPCommand<out GPPlugin>, reload: Boolean = false) {
+        commands.add(command)
+        framework.registerCommand(command, reload)
+    }
+
+    fun registerPermission(permission: String, permissionDefault: PermissionDefault) {
+        framework.registerPermission(permission, permissionDefault)
     }
 
     fun setupBStats(id: Int) {
