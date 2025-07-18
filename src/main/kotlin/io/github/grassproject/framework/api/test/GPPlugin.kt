@@ -1,7 +1,8 @@
 package io.github.grassproject.framework.api.test
 
+import io.github.grassproject.framework.GPFrameworkPlugin
+import io.github.grassproject.framework.Metrics
 import io.github.grassproject.framework.config.Config
-import io.github.grassproject.framework.util.BStatsUtils
 import io.github.grassproject.framework.util.bukkit.MinecraftVersion
 import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.plugin.java.JavaPlugin
@@ -35,7 +36,7 @@ abstract class GPPlugin : JavaPlugin(), IGPPlugin {
     }
 
     protected open fun setupBStats(id: Int) {
-        BStatsUtils(id)
+        Metrics(this, id)
     }
 
     override fun load() {}
