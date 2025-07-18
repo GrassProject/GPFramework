@@ -47,7 +47,6 @@ abstract class GPPlugin : JavaPlugin() {
         adventure = BukkitAudiences.create(this)
 
         registerPermission("${plugin.name}.reload", PermissionDefault.OP)
-
         enable()
         framework.loadPlugin(this)
     }
