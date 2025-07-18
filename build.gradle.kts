@@ -29,7 +29,7 @@ dependencies {
     implementation("net.kyori:adventure-platform-bukkit:4.4.0")
     implementation("net.kyori:adventure-text-minimessage:4.22.0")
 
-    implementation("org.bstats:bstats-bukkit:3.0.2")
+    implementation("org.bstats:bstats-bukkit:3.1.0")
 
     testImplementation(kotlin("test"))
 }
