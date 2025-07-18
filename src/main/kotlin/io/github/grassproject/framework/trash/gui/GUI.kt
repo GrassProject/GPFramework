@@ -1,4 +1,4 @@
-package io.github.grassproject.framework.gui
+package io.github.grassproject.framework.trash.gui
 
 import io.github.grassproject.framework.util.event
 import net.kyori.adventure.text.Component

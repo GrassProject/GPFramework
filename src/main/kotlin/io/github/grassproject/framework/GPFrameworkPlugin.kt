@@ -1,6 +1,6 @@
 package io.github.grassproject.framework
 
-import io.github.grassproject.framework.api.test.GPPlugin
+import io.github.grassproject.framework.core.GPPlugin
 
 class GPFrameworkPlugin : GPPlugin() {
 

@@ -1,8 +1,8 @@
-package io.github.grassproject.framework.inventory.factory
+package io.github.grassproject.framework.trash.inventory.trash.factory
 
-import io.github.grassproject.framework.inventory.IGPInventory
-import io.github.grassproject.framework.inventory.InventoryActionItem
-import io.github.grassproject.framework.inventory.InventoryLayoutBuilder
+import io.github.grassproject.framework.trash.inventory.trash.IGPInventory
+import io.github.grassproject.framework.trash.inventory.trash.InventoryActionItem
+import io.github.grassproject.framework.trash.inventory.trash.InventoryLayoutBuilder
 import org.bukkit.entity.Player
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.inventory.InventoryCloseEvent

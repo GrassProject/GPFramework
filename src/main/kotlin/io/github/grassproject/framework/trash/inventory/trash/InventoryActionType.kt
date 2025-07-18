@@ -1,4 +1,4 @@
-package io.github.grassproject.framework.inventory
+package io.github.grassproject.framework.trash.inventory.trash
 
 enum class InventoryActionType {
     NONE,

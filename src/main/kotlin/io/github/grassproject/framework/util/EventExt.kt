@@ -8,10 +8,6 @@ import org.bukkit.event.HandlerList
 import org.bukkit.event.Listener
 import org.bukkit.plugin.java.JavaPlugin
 
-fun Listener.register() {
-    GPFrameworkPlugin.instance.server.pluginManager.registerEvents(this, GPFrameworkPlugin.instance)
-}
-
 fun Event.call() {
     Bukkit.getServer().pluginManager.callEvent(this)
 }

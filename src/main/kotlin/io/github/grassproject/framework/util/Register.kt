@@ -7,9 +7,9 @@ import org.bukkit.command.TabExecutor
 import org.bukkit.event.Listener
 import org.bukkit.plugin.java.JavaPlugin
 
+@Deprecated("Framework")
 class Register(val plugin: JavaPlugin) {
 
-    @Deprecated("EventExt.kt (Listener.register())")
     fun resisterEventListener(listener: Listener): Register {
         plugin.server.pluginManager.registerEvents(listener, plugin)
         return this

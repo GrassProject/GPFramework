@@ -1,6 +1,6 @@
 package io.github.grassproject.framework.listener
 
-import io.github.grassproject.framework.inventory.IGPInventory
+import io.github.grassproject.framework.trash.inventory.trash.IGPInventory
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.inventory.InventoryClickEvent
