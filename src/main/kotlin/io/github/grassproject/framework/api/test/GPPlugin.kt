@@ -1,9 +1,8 @@
 package io.github.grassproject.framework.api.test
 
-import io.github.grassproject.framework.GPFrameworkPlugin
-import io.github.grassproject.framework.Metrics
 import io.github.grassproject.framework.config.Config
 import io.github.grassproject.framework.util.bukkit.MinecraftVersion
+import org.bstats.bukkit.Metrics
 import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.plugin.java.JavaPlugin
 

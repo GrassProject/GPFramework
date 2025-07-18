@@ -28,6 +28,9 @@ dependencies {
     })
 
     // implementation("org.reflections:reflections:0.10.2")
+
+    implementation("org.bstats:bstats-bukkit:3.0.2")
+
     testImplementation(kotlin("test"))
 }
 
@@ -48,6 +51,7 @@ tasks.withType<ShadowJar> {
     exclude("org/**")
     // exclude("META-INF/**")
 
+    relocate("org.bstats", "io.github.grassproject.framework.lib.bstats")
 //    relocate("dev.jorel.commandapi", "com.github.soldam.lib.commandapi")
 //
 //    manifest {
