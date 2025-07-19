@@ -24,12 +24,14 @@ abstract class GPPlugin : JavaPlugin() {
     private val listeners = mutableSetOf<GPListener<out GPPlugin>>()
     private val commands = mutableSetOf<GPCommand<out GPPlugin>>()
 
-    lateinit var framework: IFramework
-        private set
-    lateinit var plugin: GPPlugin
-        private set
-    lateinit var adventure: BukkitAudiences
-        private set
+    companion object {
+        lateinit var framework: IFramework
+            private set
+        lateinit var plugin: GPPlugin
+            private set
+        lateinit var adventure: BukkitAudiences
+            private set
+    }
 
     override fun onLoad() {
         framework = Framework

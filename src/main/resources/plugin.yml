@@ -6,4 +6,4 @@ author: GrassProject
 description: PluginFramework
 load: STARTUP
 libraries:
-  - org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.1.21
+  - org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.2.0

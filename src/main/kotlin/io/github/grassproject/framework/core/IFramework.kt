@@ -19,7 +19,7 @@ interface IFramework {
     fun disable(plugin: GPPlugin)
 
     fun registerEvent(listener: GPListener<out GPPlugin>)
-    fun registerCommand(command: GPCommand<out GPPlugin>, reload: Boolean)
+    fun registerCommand(name:String, command: GPCommand<out GPPlugin>)
     fun registerPermission(permission: String, permissionDefault: PermissionDefault)
 }
 
@@ -46,16 +46,20 @@ object Framework : IFramework {
         this.plugin = plugin
     }
 
-    override fun enable(plugin: GPPlugin) {}
+    override fun enable(plugin: GPPlugin) {
+        Bukkit.getPluginManager().enablePlugin(plugin)
+    }
 
-    override fun disable(plugin: GPPlugin) {}
+    override fun disable(plugin: GPPlugin) {
+        Bukkit.getPluginManager().disablePlugin(plugin)
+    }
 
     override fun registerEvent(listener: GPListener<out GPPlugin>) {
         Bukkit.getPluginManager().registerEvents(listener, listener.plugin)
     }
 
-    override fun registerCommand(command: GPCommand<out GPPlugin>, reload: Boolean) {
-        // TODO command#sub#ReloadCommand.kr
+    override fun registerCommand(name:String, command: GPCommand<out GPPlugin>) {
+        Bukkit.getServer().commandMap.register(name, command)
     }
 
     override fun registerPermission(permission: String, permissionDefault: PermissionDefault) {
