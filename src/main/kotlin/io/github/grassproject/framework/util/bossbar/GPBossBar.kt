@@ -3,8 +3,7 @@ package io.github.grassproject.framework.util.bossbar
 import net.kyori.adventure.bossbar.BossBar
 import net.kyori.adventure.text.Component
 import org.bukkit.entity.Player
-import java.util.EnumSet
-import java.util.UUID
+import java.util.*
 
 class GPBossBar(
     message: Component,

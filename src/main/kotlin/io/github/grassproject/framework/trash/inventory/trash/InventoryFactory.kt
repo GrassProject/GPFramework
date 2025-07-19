@@ -1,8 +1,8 @@
 package io.github.grassproject.framework.trash.inventory.trash
 
+import io.github.grassproject.framework.item.ItemParser
 import io.github.grassproject.framework.trash.inventory.trash.factory.PagedInventoryFactory
 import io.github.grassproject.framework.trash.inventory.trash.factory.SingleInventoryFactory
-import io.github.grassproject.framework.item.ItemParser
 import org.bukkit.configuration.ConfigurationSection
 
 object InventoryFactory {

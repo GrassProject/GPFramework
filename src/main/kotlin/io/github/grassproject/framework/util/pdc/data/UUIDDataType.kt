@@ -3,7 +3,7 @@ package io.github.grassproject.framework.util.pdc.data
 import org.bukkit.persistence.PersistentDataAdapterContext
 import org.bukkit.persistence.PersistentDataType
 import java.nio.ByteBuffer
-import java.util.UUID
+import java.util.*
 
 object UUIDDataType : PersistentDataType<ByteArray, UUID> {
     override fun getPrimitiveType(): Class<ByteArray> = ByteArray::class.java

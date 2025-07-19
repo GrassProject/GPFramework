@@ -6,7 +6,6 @@ import io.github.grassproject.framework.exepction.CommandIsRegistered
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
-import org.bukkit.permissions.PermissionDefault
 import org.bukkit.plugin.java.JavaPlugin
 
 abstract class GPCommand<T : GPPlugin>(
