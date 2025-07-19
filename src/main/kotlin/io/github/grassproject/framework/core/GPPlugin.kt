@@ -71,9 +71,9 @@ abstract class GPPlugin : JavaPlugin() {
         HandlerList.getHandlerLists().forEach { it.unregister(this) }
     }
 
-    protected fun registerCommand(command: GPCommand<out GPPlugin>, reload: Boolean = false) {
+    protected fun registerCommand(name:String, command: GPCommand<out GPPlugin>) {
         commands.add(command)
-        framework.registerCommand(command, reload)
+        framework.registerCommand(name, command)
     }
 
     fun registerPermission(permission: String, permissionDefault: PermissionDefault) {
