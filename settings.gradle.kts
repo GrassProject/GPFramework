@@ -3,4 +3,4 @@ plugins {
 }
 rootProject.name = "GPFramework"
 
-include("Framework")
+include("core")
