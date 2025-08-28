@@ -22,11 +22,11 @@ dependencies:
       required: false
       join-classpath: true
     CraftEngine:
-      required: true
+      required: false
       join-classpath: true
     ItemsAdder:
-      required: true
+      required: false
       join-classpath: true
     Nexo:
-      required: true
+      required: false
       join-classpath: true

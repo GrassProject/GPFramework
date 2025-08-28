@@ -20,6 +20,10 @@ repositories {
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT")
     implementation(project(":core"))
+
+    implementation("org.jetbrains.exposed:exposed-core:1.0.0-beta-5")
+    implementation("org.jetbrains.exposed:exposed-jdbc:1.0.0-beta-5")
+    implementation("org.jetbrains.exposed:exposed-dao:1.0.0-beta-5") // Optional
 }
 
 kotlin {
@@ -37,9 +41,19 @@ tasks.register<ShadowJar>("shadowJarPlugin") {
     from(sourceSets.main.get().output)
     configurations = listOf(project.configurations.runtimeClasspath.get())
 
+    exclude("com/zaxxer/**")
     exclude("kotlin/**", "kotlinx/**")
     exclude("org/intellij/**")
     exclude("org/jetbrains/**")
+    exclude("org/slf4j/**")
+
+    relocate("org.bstats", "io.github.grassproject.framework.shadow.bstats")
+
+    exclude(
+        "META-INF/*.SF",
+        "META-INF/*.DSA",
+        "META-INF/*.RSA",
+    )
 }
 
 tasks {

@@ -26,6 +26,13 @@ dependencies {
     compileOnly(fileTree("lib") {
         include("*.jar")
     })
+
+    implementation("org.bstats:bstats-bukkit:3.1.0")
+
+    implementation("com.zaxxer:HikariCP:7.0.2")
+    implementation("org.jetbrains.exposed:exposed-core:1.0.0-beta-5")
+    implementation("org.jetbrains.exposed:exposed-jdbc:1.0.0-beta-5")
+    implementation("org.jetbrains.exposed:exposed-dao:1.0.0-beta-5") // Optional
 }
 
 kotlin {

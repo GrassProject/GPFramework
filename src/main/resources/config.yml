@@ -1,0 +1,10 @@
+database:
+  type: SQLITE
+  credentials:
+    host: localhost
+    port: 3306
+    database: database
+    username: root
+    password: password
+  pool_options:
+    size: 10
