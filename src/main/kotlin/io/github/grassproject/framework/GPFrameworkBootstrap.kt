@@ -7,8 +7,4 @@ import org.bukkit.plugin.java.JavaPlugin
 
 class GPFrameworkBootstrap : PluginBootstrap {
     override fun bootstrap(context: BootstrapContext) {}
-
-    override fun createPlugin(context: PluginProviderContext): JavaPlugin {
-        return GPFrameworkPlugin()
-    }
 }

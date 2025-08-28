@@ -1,12 +1,15 @@
 name: GPFramework
+version: '${version}'
+author: GrassProject
+
+api-version: "1.21"
+description: PluginFramework
+load: STARTUP
+
 main: io.github.grassproject.framework.GPFrameworkPlugin
 bootstrapper: io.github.grassproject.framework.GPFrameworkBootstrap
 loader: io.github.grassproject.framework.GPFrameworkLoader
-version: '${version}'
-api-version: '1.21'
-author: GrassProject
-description: PluginFramework
-load: STARTUP
+
 dependencies:
   server:
     Vault:

@@ -1,7 +1,9 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
 plugins {
-    kotlin("jvm") version "2.2.10"
-    id("com.gradleup.shadow") version  "9.0.0-beta10"
-//    id("xyz.jpenilla.run-paper") version "2.3.1"
+    kotlin("jvm") version "2.2.0"
+    java
+    id("com.gradleup.shadow") version "9.0.0-beta11"
 }
 
 group = "io.github.grassproject"
@@ -9,79 +11,52 @@ version = "0.1-RC1"
 
 repositories {
     mavenCentral()
-    maven("https://repo.papermc.io/repository/maven-public/") // Paper
-    maven("https://maven.devs.beer/")
-    maven("https://repo.nexomc.com/releases")
+    maven {
+        name = "papermc"
+        url = uri("https://repo.papermc.io/repository/maven-public/")
+    }
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT") // Paper
-    compileOnly("dev.lone:api-itemsadder:4.0.10")
-    compileOnly("com.nexomc:nexo:1.8.0")
-    compileOnly("com.arcaniax:HeadDatabase-API:1.3.2")
+    compileOnly("io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT")
 
-    compileOnly(fileTree("lib") {
-        include("*.jar")
-    })
-
-    implementation("net.kyori:adventure-platform-bukkit:4.4.0")
-    implementation("net.kyori:adventure-text-minimessage:4.22.0")
-
-    implementation("org.bstats:bstats-bukkit:3.1.0")
-
-    testImplementation(kotlin("test"))
+    implementation(project(":Framework"))
 }
 
 kotlin {
     jvmToolchain(21)
 }
 
-tasks.test {
-    useJUnitPlatform()
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
 
-tasks.build {
-    dependsOn("shadowJar")
+tasks.register<ShadowJar>("shadowJarPlugin") {
+    archiveFileName.set("GPFramework-${project.version}-shaded.jar")
+
+    from(sourceSets.main.get().output)
+    configurations = listOf(project.configurations.runtimeClasspath.get())
+
+    exclude("kotlin/**", "kotlinx/**")
+    exclude("org/intellij/**")
+    exclude("org/jetbrains/**")
 }
 
-tasks.shadowJar {
-     exclude("kotlin/**")
-     exclude("org/**")
-    // exclude("META-INF/**")
-
-    relocate("org.bstats", "io.github.grassproject.framework.lib.bstats")
-    relocate("net.kyori", "io.github.grassproject.framework.lib.kyori")
-    dependencies {
-//        include(dependency("com.arcaniax:HeadDatabase-API:1.3.2"))
+tasks {
+    build {
+        dependsOn(named("shadowJarPlugin"))
     }
-    minimize {
-        exclude("io.github.grassproject/**")
-    }
-//    relocate("dev.jorel.commandapi", "com.github.soldam.lib.commandapi")
-//
-//    manifest {
-//        attributes["paperweight-mappings-namespace"] = "mojang"
-//    }
 
-    archiveFileName.set("${rootProject.name}-${rootProject.version}.jar")
-//    destinationDirectory=file("C:\\Users\\aa990\\OneDrive\\바탕 화면\\GPServer\\plugins") //
-}
-
-tasks.processResources {
-    val props = mapOf("version" to version)
-    inputs.properties(props)
-    filteringCharset = "UTF-8"
-    filesMatching("plugin.yml") {
-        expand(props)
+    compileJava {
+        options.encoding = Charsets.UTF_8.name()
+        options.release.set(21)
     }
-    filesMatching("paper-plugin.yml") {
-        expand(props)
+
+    processResources {
+        filteringCharset = Charsets.UTF_8.name()
+        filesMatching("paper-plugin.yml") {
+            expand(getProperties() + mapOf("version" to project.version))
+        }
     }
 }
-
-//tasks.runServer {
-//        // Configure the Minecraft version for our task.
-//        // This is the only required configuration besides applying the plugin.
-//        // Your plugin's jar (or shadowJar if present) will be used automatically.
-//    minecraftVersion("1.21.1")
-//}
