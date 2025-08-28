@@ -21,3 +21,12 @@ dependencies:
     PlaceholderAPI:
       required: false
       join-classpath: true
+    CraftEngine:
+      required: true
+      join-classpath: true
+    ItemsAdder:
+      required: true
+      join-classpath: true
+    Nexo:
+      required: true
+      join-classpath: true
