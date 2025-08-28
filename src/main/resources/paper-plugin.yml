@@ -1,5 +1,5 @@
 name: GPFramework
-version: '${version}'
+version: ${version}
 author: GrassProject
 
 api-version: "1.21"

@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "io.github.grassproject"
-version = "0.1-RC1"
+version = "0.2-RC1"
 
 repositories {
     mavenCentral()

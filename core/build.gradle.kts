@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "io.github.grassproject"
-version = parent!!.version
+version = rootProject.version
 
 repositories {
     mavenCentral()
