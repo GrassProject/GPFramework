@@ -12,7 +12,12 @@ enum class MinecraftVersion(val versionString: String) {
     V1_21("1.21.0"),
     V1_21_2("1.21.2"),
     V1_21_1("1.21.1"),
-    V1_21_4("1.21.4");
+    V1_21_4("1.21.4"),
+    V1_21_5("1.21.5"),
+    V1_21_6("1.21.6"),
+    V1_21_7("1.21.7"),
+    V1_21_8("1.21.8"),
+    ;
 
     companion object {
         private val VERSION_PATTERN: Pattern = Pattern.compile("1\\.(19|20|21)(\\.\\d+)?")

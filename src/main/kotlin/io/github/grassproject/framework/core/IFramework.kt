@@ -1,7 +1,7 @@
 package io.github.grassproject.framework.core
 
 import io.github.grassproject.framework.core.command.GPCommand
-import io.github.grassproject.framework.core.listener.GPListener
+import io.github.grassproject.framework.core.events.GPListener
 import org.bukkit.Bukkit
 import org.bukkit.permissions.Permission
 import org.bukkit.permissions.PermissionDefault
@@ -17,6 +17,7 @@ interface IFramework {
     fun load(plugin: GPPlugin)
     fun enable(plugin: GPPlugin)
     fun disable(plugin: GPPlugin)
+    fun reload(plugin: GPPlugin)
 
     fun registerEvent(listener: GPListener<out GPPlugin>)
     fun registerCommand(name:String, command: GPCommand<out GPPlugin>)
@@ -52,6 +53,11 @@ object Framework : IFramework {
 
     override fun disable(plugin: GPPlugin) {
         Bukkit.getPluginManager().disablePlugin(plugin)
+    }
+
+    override fun reload(plugin: GPPlugin) {
+        disable(plugin)
+        enable(plugin)
     }
 
     override fun registerEvent(listener: GPListener<out GPPlugin>) {

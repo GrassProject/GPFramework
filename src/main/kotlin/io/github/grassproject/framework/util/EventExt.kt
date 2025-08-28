@@ -7,10 +7,6 @@ import org.bukkit.event.HandlerList
 import org.bukkit.event.Listener
 import org.bukkit.plugin.java.JavaPlugin
 
-fun Event.call() {
-    Bukkit.getServer().pluginManager.callEvent(this)
-}
-
 inline fun <reified T : Event> event(
     crossinline handler: T.() -> Unit
 ): RegisteredEvent {

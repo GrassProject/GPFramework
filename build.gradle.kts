@@ -1,13 +1,11 @@
-import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-
 plugins {
-    kotlin("jvm") version "2.2.0"
+    kotlin("jvm") version "2.2.10"
     id("com.gradleup.shadow") version  "9.0.0-beta10"
 //    id("xyz.jpenilla.run-paper") version "2.3.1"
 }
 
 group = "io.github.grassproject"
-version = "1.0-SNAPSHOT"
+version = "0.1-RC1"
 
 repositories {
     mavenCentral()
@@ -17,7 +15,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.21.7-R0.1-SNAPSHOT") // Paper
+    compileOnly("io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT") // Paper
     compileOnly("dev.lone:api-itemsadder:4.0.10")
     compileOnly("com.nexomc:nexo:1.8.0")
     compileOnly("com.arcaniax:HeadDatabase-API:1.3.2")
@@ -46,13 +44,19 @@ tasks.build {
     dependsOn("shadowJar")
 }
 
-tasks.withType<ShadowJar> {
-    // exclude("kotlin/**")
-    // exclude("org/**")
+tasks.shadowJar {
+     exclude("kotlin/**")
+     exclude("org/**")
     // exclude("META-INF/**")
 
     relocate("org.bstats", "io.github.grassproject.framework.lib.bstats")
     relocate("net.kyori", "io.github.grassproject.framework.lib.kyori")
+    dependencies {
+//        include(dependency("com.arcaniax:HeadDatabase-API:1.3.2"))
+    }
+    minimize {
+        exclude("io.github.grassproject/**")
+    }
 //    relocate("dev.jorel.commandapi", "com.github.soldam.lib.commandapi")
 //
 //    manifest {
@@ -60,7 +64,7 @@ tasks.withType<ShadowJar> {
 //    }
 
     archiveFileName.set("${rootProject.name}-${rootProject.version}.jar")
-    destinationDirectory=file("C:\\Users\\aa990\\OneDrive\\바탕 화면\\GPServer\\plugins") //
+//    destinationDirectory=file("C:\\Users\\aa990\\OneDrive\\바탕 화면\\GPServer\\plugins") //
 }
 
 tasks.processResources {

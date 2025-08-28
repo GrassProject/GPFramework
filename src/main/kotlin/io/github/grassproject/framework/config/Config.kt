@@ -6,7 +6,6 @@ import java.io.File
 import java.io.IOException
 
 class Config(private val plugin: JavaPlugin) {
-
     fun loadYaml(path: String): YamlConfiguration = loadYaml(getFile(path))
 
     fun loadYaml(file: File): YamlConfiguration {
@@ -22,9 +21,10 @@ class Config(private val plugin: JavaPlugin) {
 
     fun setValue(file: File, configPath: String, value: Any) {
         val config = YamlConfiguration.loadConfiguration(file)
-        config.set(configPath, value)
         try {
-            config.save(file)
+            config.apply {
+                set(configPath, value)
+            }.save(file)
         } catch (e: IOException) {
             e.printStackTrace()
         }

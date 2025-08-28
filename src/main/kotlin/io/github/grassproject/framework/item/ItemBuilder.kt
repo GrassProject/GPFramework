@@ -23,7 +23,7 @@ import org.bukkit.inventory.meta.components.ToolComponent
 import org.bukkit.inventory.meta.components.UseCooldownComponent
 import org.bukkit.persistence.PersistentDataType
 
-class ItemBuilder(var itemStack: ItemStack) {
+class ItemBuilder(private var itemStack: ItemStack) {
 
     private var itemMeta: ItemMeta = itemStack.itemMeta
 

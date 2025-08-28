@@ -8,7 +8,7 @@ import net.kyori.adventure.text.format.TextColor
 import net.kyori.adventure.text.format.TextDecoration
 import net.kyori.adventure.text.minimessage.MiniMessage
 
-object StringExt {
+object Str2Component {
     private val miniMessage = MiniMessage.miniMessage()
 
     private val COLOR_TO_LEGACY = mapOf(
@@ -193,7 +193,7 @@ object StringExt {
     }
 }
 
-fun Component.toLegacyString(): String = StringExt.toLegacyString(this)
+fun Component.toLegacyString(): String = Str2Component.toLegacyString(this)
 // fun Component.toLegacy(): String = LegacyComponentSerializer.legacySection().serialize(this)
-fun String.toMiniMessage(): Component = StringExt.toMiniMessage(this)
-fun String.toComponent(): Component = StringExt.toComponent(this.replace("&", "§"))
+fun String.toMiniMessage(): Component = Str2Component.toMiniMessage(this)
+fun String.toComponent(): Component = Str2Component.toComponent(this.replace("&", "§"))

@@ -1,7 +1,7 @@
 package io.github.grassproject.framework.core
 
 import io.github.grassproject.framework.core.command.GPCommand
-import io.github.grassproject.framework.core.listener.GPListener
+import io.github.grassproject.framework.core.events.GPListener
 import io.github.grassproject.framework.util.bukkit.MinecraftVersion
 import net.kyori.adventure.platform.bukkit.BukkitAudiences
 import org.bstats.bukkit.Metrics

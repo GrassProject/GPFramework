@@ -1,8 +1,8 @@
 package io.github.grassproject.framework.core.command
 
 import io.github.grassproject.framework.core.GPPlugin
+import io.github.grassproject.framework.exepction.CommandAlreadyRegistered
 import io.github.grassproject.framework.exepction.CommandIsNotRegistered
-import io.github.grassproject.framework.exepction.CommandIsRegistered
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
@@ -31,7 +31,7 @@ abstract class GPCommand<T : GPPlugin>(
 
     fun register() {
         if (this.isRegistered) {
-            throw CommandIsRegistered()
+            throw CommandAlreadyRegistered()
         }
         this.register(Bukkit.getServer().commandMap)
     }
