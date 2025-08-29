@@ -1,9 +1,12 @@
 plugins {
     kotlin("jvm")
+    java
 }
 
-group = "io.github.grassproject"
+group = rootProject.group
 version = rootProject.version
+
+val exposed = "1.0.0-beta-5"
 
 repositories {
     mavenCentral()
@@ -18,6 +21,7 @@ repositories {
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT")
+
     compileOnly("dev.lone:api-itemsadder:4.0.10")
     compileOnly("com.nexomc:nexo:1.10.0")
     compileOnly("net.momirealms:craft-engine-core:0.0.61")
@@ -29,10 +33,11 @@ dependencies {
 
     implementation("org.bstats:bstats-bukkit:3.1.0")
 
-    implementation("com.zaxxer:HikariCP:7.0.2")
-    implementation("org.jetbrains.exposed:exposed-core:1.0.0-beta-5")
-    implementation("org.jetbrains.exposed:exposed-jdbc:1.0.0-beta-5")
-    implementation("org.jetbrains.exposed:exposed-dao:1.0.0-beta-5") // Optional
+    compileOnly("com.zaxxer:HikariCP:7.0.2")
+
+    implementation("org.jetbrains.exposed:exposed-core:${exposed}")
+    implementation("org.jetbrains.exposed:exposed-jdbc:${exposed}")
+    implementation("org.jetbrains.exposed:exposed-dao:${exposed}")
 }
 
 kotlin {

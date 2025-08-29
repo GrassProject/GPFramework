@@ -1,13 +1,15 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
-    kotlin("jvm") version "2.2.0"
+    kotlin("jvm") version "2.2.10"
     java
     id("com.gradleup.shadow") version "9.0.0-beta11"
 }
 
 group = "io.github.grassproject"
 version = "0.2-RC1"
+
+val exposed = "1.0.0-beta-5"
 
 repositories {
     mavenCentral()
@@ -19,11 +21,12 @@ repositories {
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT")
-    implementation(project(":core"))
 
-    implementation("org.jetbrains.exposed:exposed-core:1.0.0-beta-5")
-    implementation("org.jetbrains.exposed:exposed-jdbc:1.0.0-beta-5")
-    implementation("org.jetbrains.exposed:exposed-dao:1.0.0-beta-5") // Optional
+    implementation(project(":Core"))
+
+    implementation("org.jetbrains.exposed:exposed-core:${exposed}")
+    implementation("org.jetbrains.exposed:exposed-jdbc:${exposed}")
+    implementation("org.jetbrains.exposed:exposed-dao:${exposed}") // Optional
 }
 
 kotlin {
@@ -36,7 +39,7 @@ java {
 }
 
 tasks.register<ShadowJar>("shadowJarPlugin") {
-    archiveFileName.set("GPFramework-${project.version}-shaded.jar")
+    archiveFileName.set("GPFramework-${project.version}.jar")
 
     from(sourceSets.main.get().output)
     configurations = listOf(project.configurations.runtimeClasspath.get())
@@ -47,29 +50,31 @@ tasks.register<ShadowJar>("shadowJarPlugin") {
     exclude("org/jetbrains/**")
     exclude("org/slf4j/**")
 
-    relocate("org.bstats", "io.github.grassproject.framework.shadow.bstats")
+    relocate("org.bstats", "io.github.grassproject.bstats")
 
-    exclude(
-        "META-INF/*.SF",
-        "META-INF/*.DSA",
-        "META-INF/*.RSA",
-    )
+//    exclude(
+//        "META-INF/*.SF",
+//        "META-INF/*.DSA",
+//        "META-INF/*.RSA",
+//    ) // 이거는 include하는게 더 나을 듯? 없으면 안되는거도 몇개 있어서
 }
 
 tasks {
     build {
-        dependsOn(named("shadowJarPlugin"))
+        dependsOn("shadowJarPlugin")
     }
 
     compileJava {
-        options.encoding = Charsets.UTF_8.name()
+        options.encoding = "UTF-8"
         options.release.set(21)
     }
 
-    processResources {
-        filteringCharset = Charsets.UTF_8.name()
-        filesMatching("paper-plugin.yml") {
-            expand(getProperties() + mapOf("version" to project.version))
+    processResources { // 학교 노트북에서 오류 나서 이건 이렇게 해줘요
+        val props = mapOf("version" to version)
+        inputs.properties(props)
+        filteringCharset = "UTF-8"
+        filesMatching("^(paper-plugin|plugin)\\.yml$") {
+            expand(props)
         }
     }
 }
