@@ -69,7 +69,7 @@ tasks {
         options.release.set(21)
     }
 
-    processResources { // 학교 노트북에서 오류 나서 이건 이렇게 해줘요
+    processResources {
         val props = mapOf("version" to version)
         inputs.properties(props)
         filteringCharset = "UTF-8"
