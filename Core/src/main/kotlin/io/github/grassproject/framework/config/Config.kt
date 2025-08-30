@@ -4,6 +4,8 @@ import io.github.grassproject.framework.core.GPPlugin
 import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.configuration.file.YamlConfiguration
 import java.io.File
+import kotlin.reflect.KClass
+import kotlin.reflect.full.cast
 
 fun GPPlugin.saveResource(resource: String, file: File) {
     if (file.exists()) return
@@ -23,7 +25,7 @@ fun GPPlugin.saveResource(resource: String, file: File) {
     }
 }
 
-fun GPPlugin.init(vararg configs: GPFile) {
+fun GPPlugin.init(vararg configs: GPConfig) {
     configs.forEach { yaml ->
         val file = File(dataFolder, yaml.name)
         if (!file.exists()) saveResource(yaml.name, file)
@@ -60,6 +62,10 @@ abstract class Config {
     open fun double(path: String, def: Double = 0.0) = config.getDouble(path, def)
     open fun doubleList(path: String) = config.getDoubleList(path)
 
+    open fun <T: Any> getValue(path: String, clazz: KClass<T>): T {
+        return clazz.cast(config.get(path))
+    }
+
     inline fun <reified T : Enum<T>> enum(path: String, def: T): T {
         val str = string(path, def.name)
         return runCatching { enumValueOf<T>(str.uppercase()) }.getOrDefault(def)
@@ -87,7 +93,7 @@ open class ConfigFile(open val file: File) : Config() {
     }
 }
 
-open class GPFile(pluginFolder: File, open var name: String) :
+open class GPConfig(pluginFolder: File, open var name: String) :
     ConfigFile(File(pluginFolder, name)) {
 
     constructor(pluginFolder: File, name: String, autoCreate: Boolean = true) : this(pluginFolder, name) {

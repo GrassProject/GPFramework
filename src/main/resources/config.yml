@@ -8,3 +8,5 @@ database:
     password: password
   pool_options:
     size: 10
+
+lang: ko

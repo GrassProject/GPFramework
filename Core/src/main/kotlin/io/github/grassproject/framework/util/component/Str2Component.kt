@@ -7,8 +7,6 @@ import net.kyori.adventure.text.format.Style
 import net.kyori.adventure.text.format.TextColor
 import net.kyori.adventure.text.format.TextDecoration
 import net.kyori.adventure.text.minimessage.MiniMessage
-import kotlin.collections.get
-import kotlin.text.iterator
 
 object Str2Component {
     private val miniMessage = MiniMessage.miniMessage()

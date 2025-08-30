@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "io.github.grassproject"
-version = "0.2-RC1"
+version = "0.2-RC2"
 
 val exposed = "1.0.0-beta-5"
 
@@ -73,7 +73,10 @@ tasks {
         val props = mapOf("version" to version)
         inputs.properties(props)
         filteringCharset = "UTF-8"
-        filesMatching("^(paper-plugin|plugin)\\.yml$") {
+        filesMatching("paper-plugin.yml") {
+            expand(props)
+        }
+        filesMatching("plugin.yml") {
             expand(props)
         }
     }

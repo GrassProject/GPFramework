@@ -1,6 +1,8 @@
 package io.github.grassproject.framework.item
 
-import io.github.grassproject.framework.item.factory.*
+import io.github.grassproject.framework.item.factory.CraftEngineFactory
+import io.github.grassproject.framework.item.factory.IAFactory
+import io.github.grassproject.framework.item.factory.NexoFactory
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 

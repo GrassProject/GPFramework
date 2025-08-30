@@ -15,7 +15,6 @@ import org.bukkit.inventory.meta.ItemMeta
 import org.bukkit.inventory.meta.components.CustomModelDataComponent
 import org.bukkit.persistence.PersistentDataContainer
 import org.bukkit.persistence.PersistentDataType
-import kotlin.collections.iterator
 
 class ItemBuilder(private val itemStack: ItemStack) {
 

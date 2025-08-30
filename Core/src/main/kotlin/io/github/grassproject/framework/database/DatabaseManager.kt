@@ -2,14 +2,12 @@ package io.github.grassproject.framework.database
 
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
-import io.github.grassproject.framework.config.GPFile
-import io.github.grassproject.framework.core.GPPlugin
+import io.github.grassproject.framework.config.GPConfig
 import org.jetbrains.exposed.v1.core.Table
 import org.jetbrains.exposed.v1.jdbc.Database
 import org.jetbrains.exposed.v1.jdbc.SchemaUtils
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.io.File
-import java.io.IOException
 
 object DatabaseManager {
 
@@ -19,7 +17,7 @@ object DatabaseManager {
         this.driver = driver
     }
 
-    fun initConfig(config: GPFile) {
+    fun initConfig(config: GPConfig) {
         val type = config.enum("database.type", DataType.SQLITE)
 
         val host = config.string("database.credentials.host", "localhost")

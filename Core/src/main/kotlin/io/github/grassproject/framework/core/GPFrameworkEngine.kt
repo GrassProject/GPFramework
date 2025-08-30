@@ -1,20 +1,18 @@
 package io.github.grassproject.framework.core
 
-import org.slf4j.LoggerFactory
+import io.github.grassproject.framework.util.GPLogger
 
 object GPFrameworkEngine {
-
-    private val logger = LoggerFactory.getLogger("GPFramework")
     private val plugins = mutableMapOf<String, GPPlugin>()
 
     fun register(plugin: GPPlugin) {
         plugins[plugin.name] = plugin
-        logger.info("Registered plugin ${plugin.name}")
+        GPLogger.suc("Registered plugin ${plugin.name}")
     }
 
     fun unregister(plugin: GPPlugin) {
         plugins.remove(plugin.name)
-        logger.info("Unregistered plugin ${plugin.name}")
+        GPLogger.bug("Unregistered plugin ${plugin.name}")
     }
 
     fun getPlugin(name: String): GPPlugin? = plugins[name]

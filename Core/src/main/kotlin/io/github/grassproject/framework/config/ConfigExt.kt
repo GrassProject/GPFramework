@@ -4,7 +4,6 @@ import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.configuration.MemoryConfiguration
 import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.configuration.file.YamlConfiguration
-import kotlin.collections.iterator
 
 fun ConfigurationSection.keysForEach(path: String, boolean: Boolean, function: (String) -> Unit) {
     val section = getConfigurationSection(path) ?: return
