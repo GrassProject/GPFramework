@@ -13,10 +13,12 @@ object DatabaseManager {
 
     private var driver: DataDriver? = null
 
+    @JvmStatic
     fun init(driver: DataDriver) {
         this.driver = driver
     }
 
+    @JvmStatic
     fun initConfig(config: GPConfig) {
         val type = config.enum("database.type", DataType.SQLITE)
 
@@ -33,9 +35,11 @@ object DatabaseManager {
         }
     }
 
+    @JvmStatic
     fun connect() = driver?.connect()
         ?: throw IllegalStateException("Database driver not initialized")
 
+    @JvmStatic
     fun close() {
         driver?.close()
         driver = null

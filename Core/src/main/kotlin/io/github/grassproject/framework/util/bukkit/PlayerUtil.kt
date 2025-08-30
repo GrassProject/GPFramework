@@ -5,10 +5,12 @@ import org.bukkit.OfflinePlayer
 import java.util.*
 
 object PlayerUtil {
+    @JvmStatic
     fun UUID.toOfflinePlayer(): OfflinePlayer {
         return Bukkit.getOfflinePlayer(this)
     }
 
+    @JvmStatic
     fun String.toPlayer(): OfflinePlayer {
         return try {
             Bukkit.getOfflinePlayer(UUID.fromString(this))
@@ -17,6 +19,7 @@ object PlayerUtil {
         }
     }
 
+    @JvmStatic
     fun String.toUUID(): UUID {
         return UUID.fromString(this)
     }

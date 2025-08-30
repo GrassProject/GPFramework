@@ -8,12 +8,14 @@ import org.bukkit.inventory.ItemStack
 
 object ItemHandler {
 
+    @JvmStatic
     val ITEM_FACTORIES = hashMapOf(
         "ITEMSADDER" to IAFactory,
         "CRAFTENGINE" to CraftEngineFactory,
         "NEXO" to NexoFactory
     )
 
+    @JvmStatic
     fun itemStackFromId(namespace: String): ItemStack? {
         return if (namespace.contains(":")) {
             val id = namespace.split(":").first().uppercase()
