@@ -66,6 +66,11 @@ abstract class Config {
         return clazz.cast(config.get(path))
     }
 
+    open fun <T: Any> getList(path: String, clazz: KClass<T>): List<T> {
+        val t=config.getList(path) ?: emptyList()
+        return t.filterIsInstance(clazz.java)
+    }
+
     inline fun <reified T : Enum<T>> enum(path: String, def: T): T {
         val str = string(path, def.name)
         return runCatching { enumValueOf<T>(str.uppercase()) }.getOrDefault(def)
