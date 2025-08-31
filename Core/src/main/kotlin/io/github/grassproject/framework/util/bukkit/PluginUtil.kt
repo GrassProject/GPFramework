@@ -1,5 +1,6 @@
 package io.github.grassproject.framework.util.bukkit
 
+import io.github.grassproject.framework.core.GPPlugin
 import org.bukkit.Bukkit
 
 object PluginUtil {
@@ -26,5 +27,15 @@ object PluginUtil {
         Bukkit.getPluginManager().disablePlugin(
             Bukkit.getPluginManager().getPlugin(plugin) ?: return
         )
+    }
+
+    @JvmStatic
+    fun asynchronously(instance: GPPlugin, runnable: Runnable) {
+        Bukkit.getScheduler().runTaskAsynchronously(instance, runnable)
+    }
+
+    @JvmStatic
+    fun runTask (instance: GPPlugin, runnable: Runnable) {
+        Bukkit.getScheduler().runTask(instance, runnable)
     }
 }

@@ -1,5 +1,8 @@
 package io.github.grassproject.framework.core
 
+import io.github.grassproject.framework.events.GPPluginUnregisterEvent
+import io.github.grassproject.framework.events.GPPluginRegisterEvent
+import io.github.grassproject.framework.exepction.FailToCallEvent
 import io.github.grassproject.framework.util.GPLogger
 
 object GPFrameworkEngine {
@@ -9,12 +12,18 @@ object GPFrameworkEngine {
     fun register(plugin: GPPlugin) {
         plugins[plugin.name] = plugin
         GPLogger.suc("Registered plugin ${plugin.name}")
+
+        val event= GPPluginRegisterEvent(plugin)
+        if (!event.callEvent()) throw FailToCallEvent(event.name)
     }
 
     @JvmStatic
     fun unregister(plugin: GPPlugin) {
         plugins.remove(plugin.name)
-        GPLogger.bug("Unregistered plugin ${plugin.name}")
+        GPLogger.warning("Unregistered plugin ${plugin.name}")
+
+        val event= GPPluginUnregisterEvent(plugin)
+        if (!event.callEvent()) throw FailToCallEvent(event.name)
     }
 
     @JvmStatic

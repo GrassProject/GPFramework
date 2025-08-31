@@ -45,7 +45,7 @@ class GPFCommand: GPCommand<GPFrameworkPlugin>(
         }
         return tab
     }
-
+//
 // sorted()
 //    fun listPluginsColored(): List<String> {
 //        val serializer = LegacyComponentSerializer.legacySection()
