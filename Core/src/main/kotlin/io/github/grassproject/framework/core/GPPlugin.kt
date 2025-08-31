@@ -5,10 +5,10 @@ import io.github.grassproject.framework.util.bukkit.MinecraftVersion
 import org.bukkit.plugin.java.JavaPlugin
 
 abstract class GPPlugin : JavaPlugin(), GPFramework {
-    val version=pluginMeta.version
-    val authors=pluginMeta.authors
-    val description=pluginMeta.description
-    val apiVersion=pluginMeta.apiVersion
+    val version = pluginMeta.version
+    val authors = pluginMeta.authors
+    val description = pluginMeta.description
+    val apiVersion = pluginMeta.apiVersion
 
     override fun onLoad() {
         load()
