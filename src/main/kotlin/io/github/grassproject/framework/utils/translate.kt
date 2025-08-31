@@ -10,8 +10,8 @@ object translate {
 
     private fun jsonGenerator(): File {
         plugin.reloadConfig()
-        val lang=plugin.config.getString("language") ?: "ko"
-        val json= File("${plugin.dataFolder}/lang", "${lang}.json")
+        val lang = plugin.config.getString("language") ?: "ko"
+        val json = File("${plugin.dataFolder}/lang", "${lang}.json")
         return json
     }
 
@@ -35,14 +35,14 @@ object translate {
     }
 
     fun literate(string: String): String {
-        val json= jsonGenerator()
+        val json = jsonGenerator()
         return Gson().fromJson(json.readText(), JsonObject::class.java)
             .get(string)?.asString ?: string
     }
 
     fun fromList(string: String): MutableList<String> {
-        val json= jsonGenerator()
-        val array=Gson().fromJson(json.readText(), JsonObject::class.java)
+        val json = jsonGenerator()
+        val array = Gson().fromJson(json.readText(), JsonObject::class.java)
             .get(string)
             .asJsonArray.mapNotNull { it.asString }.toMutableList()
         return array
