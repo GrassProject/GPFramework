@@ -7,13 +7,13 @@ import org.bukkit.event.HandlerList
 import org.bukkit.event.player.PlayerEvent
 
 open class GPEvent(
-    val name:String,
-    isAsync:Boolean=false
+    val name: String,
+    isAsync: Boolean = false
 ): Event(isAsync), Cancellable {
-    private var cancelled:Boolean=false;
+    private var cancelled: Boolean = false;
     override fun isCancelled(): Boolean = cancelled
     override fun setCancelled(cancel: Boolean) {
-        this.cancelled=cancel
+        this.cancelled = cancel
     }
 
     override fun getEventName() = this.name
@@ -29,13 +29,13 @@ open class GPEvent(
 
 open class GPPlayerEvent(
     player: Player,
-    val name:String,
-    isAsync:Boolean=false
+    val name: String,
+    isAsync: Boolean = false
 ): PlayerEvent(player, isAsync), Cancellable {
-    private var cancelled:Boolean=false;
+    private var cancelled:Boolean = false;
     override fun isCancelled(): Boolean = cancelled
     override fun setCancelled(cancel: Boolean) {
-        this.cancelled=cancel
+        this.cancelled = cancel
     }
 
     override fun getEventName() = this.name

@@ -101,10 +101,12 @@ open class ConfigFile(open val file: File) : Config() {
 open class GPConfig(pluginFolder: File, open var name: String) :
     ConfigFile(File(pluginFolder, name)) {
 
-    constructor(pluginFolder: File, name: String, autoCreate: Boolean = true) : this(pluginFolder, name) {
+    constructor(pluginFolder: File, name: String, autoCreate: Boolean = false) : this(pluginFolder, name) {
         if (autoCreate && !file.exists()) {
             file.parentFile.mkdirs()
             file.createNewFile()
         }
     }
+
+    constructor(pluginFolderPath: String, name: String, autoCreate: Boolean = false) : this(File(pluginFolderPath), name, autoCreate)
 }

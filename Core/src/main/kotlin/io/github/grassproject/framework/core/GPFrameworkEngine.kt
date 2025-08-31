@@ -13,7 +13,7 @@ object GPFrameworkEngine {
         plugins[plugin.name] = plugin
         GPLogger.suc("Registered plugin ${plugin.name}")
 
-        val event= GPPluginRegisterEvent(plugin)
+        val event = GPPluginRegisterEvent(plugin)
         if (!event.callEvent()) throw FailToCallEvent(event.name)
     }
 
@@ -22,7 +22,7 @@ object GPFrameworkEngine {
         plugins.remove(plugin.name)
         GPLogger.warning("Unregistered plugin ${plugin.name}")
 
-        val event= GPPluginUnregisterEvent(plugin)
+        val event = GPPluginUnregisterEvent(plugin)
         if (!event.callEvent()) throw FailToCallEvent(event.name)
     }
 
