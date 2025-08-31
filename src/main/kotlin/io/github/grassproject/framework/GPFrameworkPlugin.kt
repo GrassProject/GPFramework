@@ -16,7 +16,7 @@ class GPFrameworkPlugin : GPPlugin() {
     override fun load() {
         instance = this
         saveResource("lang/ko.json", true)
-        GPLogger.info("Loading Framework...")
+        logger.info("Loading Framework...")
     }
 
     override fun enable() {
@@ -25,12 +25,12 @@ class GPFrameworkPlugin : GPPlugin() {
         DatabaseManager.initConfig(config)
         DatabaseManager.connect()
 
-        GPLogger.info("GPFramework successfully enabled")
+        logger.info("GPFramework successfully enabled")
 
         GPFCommand()
     }
 
     override fun disable() {
-        GPLogger.warning("GPFramework disabled")
+        logger.warning("GPFramework disabled")
     }
 }
