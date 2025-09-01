@@ -12,6 +12,7 @@ abstract class GPPlugin : JavaPlugin(), GPFramework {
     lateinit var logger: GPLogger
 
     override fun onLoad() {
+        logger = GPLogger(this)
         load()
     }
 
@@ -22,13 +23,12 @@ abstract class GPPlugin : JavaPlugin(), GPFramework {
             return
         }
 
-        enable()
         GPFrameworkEngine.register(this)
-        logger=GPLogger(this)
+        enable()
     }
 
     override fun onDisable() {
-        disable()
         GPFrameworkEngine.unregister(this)
+        disable()
     }
 }

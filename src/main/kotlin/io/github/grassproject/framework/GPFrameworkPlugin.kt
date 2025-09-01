@@ -21,7 +21,7 @@ class GPFrameworkPlugin : GPPlugin() {
 
     override fun enable() {
         if (GithubAPI.isLatest(this)) {
-            val data=GithubAPI.getLatest()
+            val data = GithubAPI.getLatest()
             logger.bug("New Version Released! ${data["published"]}")
             logger.bug("New: ${data["ver"]}, Now: $version")
         }

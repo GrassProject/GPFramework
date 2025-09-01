@@ -5,6 +5,7 @@ import com.google.gson.JsonObject
 import io.github.grassproject.framework.GPFrameworkPlugin
 import java.io.File
 
+@Deprecated("GPFTranslate")
 object translate {
     private val plugin = GPFrameworkPlugin.instance
 

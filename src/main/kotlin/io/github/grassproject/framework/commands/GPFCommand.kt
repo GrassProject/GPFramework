@@ -3,8 +3,9 @@ package io.github.grassproject.framework.commands
 import io.github.grassproject.framework.GPFrameworkPlugin
 import io.github.grassproject.framework.core.GPFrameworkEngine
 import io.github.grassproject.framework.command.GPCommand
+import io.github.grassproject.framework.message.GPFTranslate
+import io.github.grassproject.framework.util.McLogsUtil
 import io.github.grassproject.framework.util.component.toMiniMessage
-import io.github.grassproject.framework.utils.translate
 import org.bukkit.command.CommandSender
 
 class GPFCommand: GPCommand<GPFrameworkPlugin>(
@@ -14,33 +15,69 @@ class GPFCommand: GPCommand<GPFrameworkPlugin>(
 ) {
     private val prefix = "<#96f19c>GPF</#96f19c><#989c99> | </#989c99>".toMiniMessage()
     override fun execute(sender: CommandSender, args: Array<out String>): Boolean {
-        if (args.size == 1) {
-            if (args[0]=="info") {
-                translate.fromList(
-                    "command.gpf.info", mapOf(
-                        "server" to sender.server.name,
-                        "version" to sender.server.version,
-                        "nms" to sender.server.bukkitVersion,
-                        "name" to plugin.name,
-                        "ver" to plugin.version,
-                        "list" to GPFrameworkEngine.listPlugins().joinToString(", ")
-                    )
-                ).forEach { sender.sendMessage(prefix.append { it.toMiniMessage() }) }
-            }
+        if (args.isEmpty()) return true
 
-            if (args[0]=="") {
-
-            }
+        when (args[0].lowercase()) {
+            "info" -> info(sender)
+            "dump" -> dump(sender)
         }
+
+//        if (args.size == 1) {
+//            if (args[0]=="info") {
+//                GPFTranslate.fromList(
+//                    "command.gpf.info", mapOf(
+//                        "server" to sender.server.name,
+//                        "version" to sender.server.version,
+//                        "nms" to sender.server.bukkitVersion,
+//                        "name" to plugin.name,
+//                        "ver" to plugin.version,
+//                        "list" to GPFrameworkEngine.listPlugins().joinToString(", ")
+//                    )
+//                ).forEach { sender.sendMessage(prefix.append { it.toMiniMessage() }) }
+//            }
+//
+//            if (args[0]=="dump") {
+//                val logFile = File("logs/latest.log")
+//                if (!logFile.exists()) {
+//                    sender.sendMessage(prefix.append { "<red>로그 파일을 찾을 수 없습니다.</red>".toMiniMessage() })
+//                    return true
+//                }
+//            }
+//
+//            if (args[0]=="") {}
+//        }
         return true
     }
 
     override fun tabComplete(sender: CommandSender, args: Array<out String>): List<String> {
         val tab = mutableListOf<String>()
-        if (args.size==1) {
-            tab.addAll(arrayOf("info"))
+        if (args.size == 1) {
+            tab.addAll(arrayOf("info", "dump"))
         }
         return tab
+    }
+
+    private fun info(sender: CommandSender) {
+        GPFTranslate.fromList(
+            "command.gpf.info",
+            mapOf(
+                "server" to sender.server.name,
+                "version" to sender.server.version,
+                "nms" to sender.server.bukkitVersion,
+                "name" to plugin.name,
+                "ver" to plugin.version,
+                "list" to GPFrameworkEngine.listPlugins().joinToString(", ")
+            )
+        ).forEach { sender.sendMessage(prefix.append { it.toMiniMessage() }) }
+    }
+
+    private fun dump(sender: CommandSender) {
+        val link = McLogsUtil.uploadLogs()
+        val message = if (link != null)
+            "<green>Log dump successful</green> <gray>$link</gray>"
+        else "<red>Log dump failed</red>"
+
+        sender.sendMessage(prefix.append { message.toMiniMessage() })
     }
 //
 // sorted()
