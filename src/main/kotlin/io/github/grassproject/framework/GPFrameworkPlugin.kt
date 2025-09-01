@@ -6,6 +6,7 @@ import io.github.grassproject.framework.config.init
 import io.github.grassproject.framework.core.GPPlugin
 import io.github.grassproject.framework.database.DatabaseManager
 import io.github.grassproject.framework.github.GithubAPI
+import io.github.grassproject.framework.message.GPFTranslate
 
 class GPFrameworkPlugin : GPPlugin() {
     companion object {
@@ -22,8 +23,12 @@ class GPFrameworkPlugin : GPPlugin() {
     override fun enable() {
         if (GithubAPI.isLatest(this)) {
             val data = GithubAPI.getLatest()
-            logger.bug("New Version Released! ${data["published"]}")
-            logger.bug("New: ${data["ver"]}, Now: $version")
+            GPFTranslate.fromList(
+                "framework.find.update", mapOf(
+                    "data" to data["published"].asString,
+                    "new" to data["ver"].asString, "now" to this.version,
+                    "link" to data["download"].asString
+            )).forEach { logger.bug(it) }
         }
 
         val config = GPFile(dataFolder, "config.yml")

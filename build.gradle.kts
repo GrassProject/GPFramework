@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "io.github.grassproject"
-version = "0.2-RC5"
+version = "0.2-RC6"
 
 val exposed = "1.0.0-beta-5"
 
@@ -51,12 +51,6 @@ tasks.register<ShadowJar>("shadowJarPlugin") {
     exclude("org/slf4j/**")
 
     relocate("org.bstats", "io.github.grassproject.bstats")
-
-//    exclude(
-//        "META-INF/*.SF",
-//        "META-INF/*.DSA",
-//        "META-INF/*.RSA",
-//    ) // 이거는 include하는게 더 나을 듯? 없으면 안되는거도 몇개 있어서
 }
 
 tasks {

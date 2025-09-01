@@ -17,8 +17,8 @@ object GithubAPI {
     private const val GITHUB_API="https://api.github.com/repos/${ORG}/${REPO}/releases/latest"
 
     fun isLatest(instance: GPPlugin): Boolean {
-        val latest = getLatest() ?: return true
-        val latestRaw = latest.get("ver").asString
+        val info = getLatest() ?: return true
+        val latestRaw = info.get("ver").asString
         val currentRaw = instance.version
 
         fun parseVersion(ver: String): Pair<List<Int>, String?> {

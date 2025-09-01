@@ -1,4 +1,8 @@
 {
+  "framework.find.update":[
+    "New Version Released! Download >> {link}",
+    "New: {new}, Now: {now} ( At. {date} )"
+  ],
   "command.gpf.info": [
     "<bold> - <green>버킷 정보",
     "<bold>↪ 서버: <gray>{server}",

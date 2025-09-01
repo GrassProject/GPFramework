@@ -22,30 +22,6 @@ class GPFCommand: GPCommand<GPFrameworkPlugin>(
             "dump" -> dump(sender)
         }
 
-//        if (args.size == 1) {
-//            if (args[0]=="info") {
-//                GPFTranslate.fromList(
-//                    "command.gpf.info", mapOf(
-//                        "server" to sender.server.name,
-//                        "version" to sender.server.version,
-//                        "nms" to sender.server.bukkitVersion,
-//                        "name" to plugin.name,
-//                        "ver" to plugin.version,
-//                        "list" to GPFrameworkEngine.listPlugins().joinToString(", ")
-//                    )
-//                ).forEach { sender.sendMessage(prefix.append { it.toMiniMessage() }) }
-//            }
-//
-//            if (args[0]=="dump") {
-//                val logFile = File("logs/latest.log")
-//                if (!logFile.exists()) {
-//                    sender.sendMessage(prefix.append { "<red>로그 파일을 찾을 수 없습니다.</red>".toMiniMessage() })
-//                    return true
-//                }
-//            }
-//
-//            if (args[0]=="") {}
-//        }
         return true
     }
 
