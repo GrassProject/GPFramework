@@ -2,6 +2,7 @@ package io.github.grassproject.framework.core
 
 import io.github.grassproject.framework.util.GPLogger
 import io.github.grassproject.framework.util.bukkit.MinecraftVersion
+import org.bukkit.event.Listener
 import org.bukkit.plugin.java.JavaPlugin
 
 abstract class GPPlugin : JavaPlugin(), GPFramework {
@@ -30,5 +31,9 @@ abstract class GPPlugin : JavaPlugin(), GPFramework {
     override fun onDisable() {
         GPFrameworkEngine.unregister(this)
         disable()
+    }
+
+    fun registerListener(listener: Listener) {
+        this.server.pluginManager.registerEvents(listener, this)
     }
 }

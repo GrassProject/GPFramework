@@ -47,13 +47,50 @@ abstract class GPCommand<T : GPPlugin>(
         this.unregister(Bukkit.getServer().commandMap)
     }
 
-    override fun execute(sender: CommandSender, label: String, args: Array<out String>): Boolean {
+    final override fun execute(sender: CommandSender, label: String, args: Array<out String>): Boolean {
         return execute(sender, args)
     }
     abstract fun execute(sender: CommandSender, args: Array<out String>): Boolean
 
-    override fun tabComplete(sender: CommandSender, alias: String, args: Array<out String>): List<String?> {
+    final override fun tabComplete(sender: CommandSender, alias: String, args: Array<out String>): List<String?> {
         return tabComplete(sender, args)
     }
     abstract fun tabComplete(sender: CommandSender, args: Array<out String>): List<String?>
+
+    companion object {
+        @JvmStatic
+        fun build(
+            plugin: GPPlugin,
+            name: String,
+            aliases: List<String> = emptyList(),
+            description: String = "",
+            permission: String,
+            permissionDefault: PermissionDefault = PermissionDefault.OP,
+            execute: (sender: CommandSender, args: Array<out String>) -> Boolean,
+            tabComplete: (sender: CommandSender, args: Array<out String>) -> List<String?> = { _, _ -> emptyList() }
+        ): Boolean {
+            return try {
+                val command = object : GPCommand<GPPlugin>(
+                    plugin, name, aliases,
+                    description, permission,
+                    permissionDefault
+                ) {
+                    override fun execute(
+                        sender: CommandSender, args: Array<out String>
+                    ): Boolean = execute(sender, args)
+
+                    override fun tabComplete(
+                        sender: CommandSender, args: Array<out String>
+                    ): List<String?> = tabComplete(sender, args)
+                }
+
+                command.register()
+                true
+            } catch (e: Exception) {
+                e.printStackTrace()
+                false
+            }
+        }
+    }
+
 }

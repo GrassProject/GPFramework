@@ -10,7 +10,6 @@ import java.net.URL
 import java.nio.file.Files
 import java.nio.file.StandardCopyOption
 
-@Deprecated("TEST")
 object GithubAPI {
     private const val ORG="GrassProject"
     private const val REPO="GPFramework"
@@ -21,36 +20,40 @@ object GithubAPI {
         val latestRaw = info.get("ver").asString
         val currentRaw = instance.version
 
-        fun parseVersion(ver: String): Pair<List<Int>, String?> {
-            val parts = ver.split("-", limit = 2)
-            val numbers = parts[0].split(".").mapNotNull { it.toIntOrNull() }
-            val tag = if (parts.size > 1) parts[1].lowercase() else null
-            return numbers to tag
-        }
-
-        val (latestNums, latestTag) = parseVersion(latestRaw)
-        val (currentNums, currentTag) = parseVersion(currentRaw)
-
-        val maxLen = maxOf(latestNums.size, currentNums.size)
-        for (i in 0 until maxLen) {
-            val cur = currentNums.getOrNull(i) ?: 0
-            val lat = latestNums.getOrNull(i) ?: 0
-            if (cur < lat) return false
-            if (cur > lat) return true
-        }
-
-        return when {
-            currentTag == null && latestTag != null -> true
-            currentTag != null && latestTag == null -> false
-            currentTag == null && latestTag == null -> true
-            else -> {
-                val order = listOf("ALPHA", "BETA", "RC", "SNAPSHOT")
-                val curIndex = order.indexOfFirst { currentTag!!.contains(it) }
-                    .takeIf { it >= 0 } ?: Int.MAX_VALUE
-                val latIndex = order.indexOfFirst { latestTag!!.contains(it) }
-                    .takeIf { it >= 0 } ?: Int.MAX_VALUE
-                curIndex >= latIndex
+        try {
+            fun parseVersion(ver: String): Pair<List<Int>, String?> {
+                val parts = ver.split("-", limit = 2)
+                val numbers = parts[0].split(".").mapNotNull { it.toIntOrNull() }
+                val tag = if (parts.size > 1) parts[1].lowercase() else null
+                return numbers to tag
             }
+
+            val (latestNums, latestTag) = parseVersion(latestRaw)
+            val (currentNums, currentTag) = parseVersion(currentRaw)
+
+            val maxLen = maxOf(latestNums.size, currentNums.size)
+            for (i in 0 until maxLen) {
+                val cur = currentNums.getOrNull(i) ?: 0
+                val lat = latestNums.getOrNull(i) ?: 0
+                if (cur < lat) return false
+                if (cur > lat) return true
+            }
+
+            return when {
+                currentTag == null && latestTag != null -> true
+                currentTag != null && latestTag == null -> false
+                currentTag == null && latestTag == null -> true
+                else -> {
+                    val order = listOf("ALPHA", "BETA", "RC", "SNAPSHOT")
+                    val curIndex = order.indexOfFirst { currentTag!!.contains(it) }
+                        .takeIf { it >= 0 } ?: Int.MAX_VALUE
+                    val latIndex = order.indexOfFirst { latestTag!!.contains(it) }
+                        .takeIf { it >= 0 } ?: Int.MAX_VALUE
+                    curIndex >= latIndex
+                }
+            }
+        } catch( e: Exception ) {
+            return latestRaw==instance.version
         }
     }
 
