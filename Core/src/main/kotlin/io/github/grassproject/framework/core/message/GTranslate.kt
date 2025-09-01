@@ -5,8 +5,7 @@ import com.google.gson.JsonObject
 import io.github.grassproject.framework.core.GPPlugin
 import java.io.File
 
-// GPF util에서 가져온것
-abstract class GPMessage<T : GPPlugin>(val plugin: T) {
+abstract class GTranslate<T : GPPlugin>(val plugin: T) {
 
     private fun jsonGenerator(): File {
         plugin.reloadConfig()

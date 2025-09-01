@@ -24,7 +24,8 @@ class GPFrameworkPlugin : GPPlugin() {
         DatabaseManager.initConfig(config)
         DatabaseManager.connect()
 
-        logger.info("GPFramework successfully enabled")
+        logger.info("GPFramework successfully Enabled")
+        logger.info(" | Version: <green>${version}</green>")
 
         GPFCommand()
     }
