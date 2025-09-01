@@ -1,4 +1,4 @@
-package io.github.grassproject.framework.core.message
+package io.github.grassproject.framework.message
 
 import com.google.gson.Gson
 import com.google.gson.JsonObject

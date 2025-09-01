@@ -1,6 +1,5 @@
 package io.github.grassproject.framework.events
 
-import io.github.grassproject.framework.core.events.GPEvent
 import org.bukkit.plugin.Plugin
 
 class GPPluginRegisterEvent(

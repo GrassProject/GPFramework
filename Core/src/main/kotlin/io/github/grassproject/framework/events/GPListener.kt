@@ -1,4 +1,4 @@
-package io.github.grassproject.framework.core.events
+package io.github.grassproject.framework.events
 
 import io.github.grassproject.framework.core.GPPlugin
 import org.bukkit.event.Listener

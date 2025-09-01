@@ -2,12 +2,9 @@ package io.github.grassproject.framework.commands
 
 import io.github.grassproject.framework.GPFrameworkPlugin
 import io.github.grassproject.framework.core.GPFrameworkEngine
-import io.github.grassproject.framework.core.command.GPCommand
+import io.github.grassproject.framework.command.GPCommand
 import io.github.grassproject.framework.util.component.toMiniMessage
 import io.github.grassproject.framework.utils.translate
-import net.kyori.adventure.text.Component
-import net.kyori.adventure.text.format.NamedTextColor
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer
 import org.bukkit.command.CommandSender
 
 class GPFCommand: GPCommand<GPFrameworkPlugin>(

@@ -1,6 +1,5 @@
-package io.github.grassproject.framework.core.config
+package io.github.grassproject.framework.config
 
-import io.github.grassproject.framework.config.GPFile
 import io.github.grassproject.framework.core.GPPlugin
 
 abstract class GPConfig<T : GPPlugin>(val plugin: T) {

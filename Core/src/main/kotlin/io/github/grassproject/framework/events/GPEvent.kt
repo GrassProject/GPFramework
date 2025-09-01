@@ -1,4 +1,4 @@
-package io.github.grassproject.framework.core.events
+package io.github.grassproject.framework.events
 
 import org.bukkit.entity.Player
 import org.bukkit.event.Cancellable

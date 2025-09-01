@@ -1,4 +1,4 @@
-package io.github.grassproject.framework.core.command
+package io.github.grassproject.framework.command
 
 import io.github.grassproject.framework.core.GPPlugin
 import io.github.grassproject.framework.exepction.CommandAlreadyRegistered

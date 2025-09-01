@@ -1,7 +1,8 @@
-package io.github.grassproject.framework.core.command
+package io.github.grassproject.framework.command
 
 import com.mojang.brigadier.arguments.ArgumentType
 import com.mojang.brigadier.builder.LiteralArgumentBuilder
+import com.mojang.brigadier.builder.RequiredArgumentBuilder
 import com.mojang.brigadier.tree.LiteralCommandNode
 import io.papermc.paper.command.brigadier.CommandSourceStack
 import org.bukkit.plugin.java.JavaPlugin
@@ -27,7 +28,7 @@ abstract class GPBrigadier {
     }
 
     fun <T> argument(name: String, type: ArgumentType<T>, executes: ((CommandSourceStack, ArgumentType<T>) -> Int)? = null) {
-        val argBuilder = com.mojang.brigadier.builder.RequiredArgumentBuilder.argument<CommandSourceStack, T>(name, type)
+        val argBuilder = RequiredArgumentBuilder.argument<CommandSourceStack, T>(name, type)
         if (executes != null) {
             argBuilder.executes { ctx ->
                 val value = ctx.getArgument(name, type.javaClass)
