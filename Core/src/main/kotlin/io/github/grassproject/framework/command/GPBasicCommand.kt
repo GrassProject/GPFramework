@@ -8,10 +8,10 @@ import org.bukkit.entity.Entity
 
 abstract class GPBasicCommand(
     private val instance: GPPlugin,
-    private val name:String,
+    private val name: String,
     private val aliases: List<String>,
     private val description: String,
-    private val permission:String?=null
+    private val permission: String? = null
 ): BasicCommand {
     final override fun execute(commandSourceStack: CommandSourceStack, args: Array<out String>) {
         execute(commandSourceStack.sender, commandSourceStack.executor, args)
