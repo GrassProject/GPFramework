@@ -5,6 +5,7 @@ author: GrassProject
 api-version: "1.21"
 description: PluginFramework
 load: STARTUP
+website: https://grassproject.github.io
 
 main: io.github.grassproject.framework.GPFrameworkPlugin
 bootstrapper: io.github.grassproject.framework.GPFrameworkBootstrap

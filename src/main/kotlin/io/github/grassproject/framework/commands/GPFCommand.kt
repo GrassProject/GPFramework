@@ -50,7 +50,7 @@ class GPFCommand: GPCommand<GPFrameworkPlugin>(
     private fun dump(sender: CommandSender) {
         val link = McLogsUtil.uploadLogs()
         val message = if (link != null)
-            "<green>Log dump successful</green> <gray>$link</gray>"
+            "<green>Log dump successful</green> <gray><u><click:open_url:'$link'>$link</click></u></gray>"
         else "<red>Log dump failed</red>"
 
         sender.sendMessage(prefix.append { message.toMiniMessage() })
