@@ -1,7 +1,7 @@
 package io.github.grassproject.framework.core
 
-import io.github.grassproject.framework.events.GPPluginUnregisterEvent
 import io.github.grassproject.framework.events.GPPluginRegisterEvent
+import io.github.grassproject.framework.events.GPPluginUnregisterEvent
 import io.github.grassproject.framework.exepction.FailToCallEvent
 import io.github.grassproject.framework.util.GPLogger
 

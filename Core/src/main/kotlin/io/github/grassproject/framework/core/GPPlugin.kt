@@ -9,7 +9,7 @@ abstract class GPPlugin : JavaPlugin(), GPFramework {
     val authors = pluginMeta.authors
     val description = pluginMeta.description
     val apiVersion = pluginMeta.apiVersion
-    val logger = GPLogger
+    lateinit var logger: GPLogger
 
     override fun onLoad() {
         load()
@@ -24,6 +24,7 @@ abstract class GPPlugin : JavaPlugin(), GPFramework {
 
         enable()
         GPFrameworkEngine.register(this)
+        logger=GPLogger(this)
     }
 
     override fun onDisable() {
