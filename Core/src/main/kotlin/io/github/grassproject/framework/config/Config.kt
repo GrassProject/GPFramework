@@ -25,7 +25,7 @@ fun GPPlugin.saveResource(resource: String, file: File) {
     }
 }
 
-fun GPPlugin.init(vararg configs: GPConfig) {
+fun GPPlugin.init(vararg configs: GPFile) {
     configs.forEach { yaml ->
         val file = File(dataFolder, yaml.name)
         if (!file.exists()) saveResource(yaml.name, file)
@@ -98,7 +98,7 @@ open class ConfigFile(open val file: File) : Config() {
     }
 }
 
-open class GPConfig(pluginFolder: File, open var name: String) :
+open class GPFile(pluginFolder: File, open var name: String) :
     ConfigFile(File(pluginFolder, name)) {
 
     constructor(pluginFolder: File, name: String, autoCreate: Boolean = false) : this(pluginFolder, name) {

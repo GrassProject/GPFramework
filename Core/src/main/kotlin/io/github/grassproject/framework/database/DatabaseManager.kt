@@ -2,7 +2,7 @@ package io.github.grassproject.framework.database
 
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
-import io.github.grassproject.framework.config.GPConfig
+import io.github.grassproject.framework.config.GPFile
 import org.jetbrains.exposed.v1.core.Table
 import org.jetbrains.exposed.v1.jdbc.Database
 import org.jetbrains.exposed.v1.jdbc.SchemaUtils
@@ -19,7 +19,7 @@ object DatabaseManager {
     }
 
     @JvmStatic
-    fun initConfig(config: GPConfig) {
+    fun initConfig(config: GPFile) {
         val type = config.enum("database.type", DataType.SQLITE)
 
         val host = config.string("database.credentials.host", "localhost")

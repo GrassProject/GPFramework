@@ -1,12 +1,12 @@
-package io.github.grassproject.framework.utils
+package io.github.grassproject.framework.core.message
 
 import com.google.gson.Gson
 import com.google.gson.JsonObject
-import io.github.grassproject.framework.GPFrameworkPlugin
+import io.github.grassproject.framework.core.GPPlugin
 import java.io.File
 
-object translate {
-    private val plugin = GPFrameworkPlugin.instance
+// GPF util에서 가져온것
+abstract class GPMessage<T : GPPlugin>(val plugin: T) {
 
     private fun jsonGenerator(): File {
         plugin.reloadConfig()
@@ -36,14 +36,12 @@ object translate {
 
     fun literate(string: String): String {
         val json = jsonGenerator()
-        return Gson().fromJson(json.readText(), JsonObject::class.java)
-            .get(string)?.asString ?: string
+        return Gson().fromJson(json.readText(), JsonObject::class.java)[string]?.asString ?: string
     }
 
     fun fromList(string: String): MutableList<String> {
         val json = jsonGenerator()
-        val array = Gson().fromJson(json.readText(), JsonObject::class.java)
-            .get(string)
+        val array = Gson().fromJson(json.readText(), JsonObject::class.java)[string]
             .asJsonArray.mapNotNull { it.asString }.toMutableList()
         return array
     }
