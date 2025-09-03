@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "io.github.grassproject"
-version = "0.2-RC6"
+version = "0.2-RC7"
 
 val exposed = "1.0.0-beta-5"
 
