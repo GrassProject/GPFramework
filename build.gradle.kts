@@ -17,10 +17,17 @@ repositories {
         name = "papermc"
         url = uri("https://repo.papermc.io/repository/maven-public/")
     }
+
+    maven {
+        name = "skript"
+        url = uri("https://repo.skriptlang.org/releases")
+    }
 }
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT")
+
+    compileOnly("com.github.SkriptLang:Skript:2.11.2") { isTransitive = false }
 
     implementation(project(":Core"))
 
