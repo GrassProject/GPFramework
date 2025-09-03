@@ -16,7 +16,7 @@ class GPFrameworkPlugin : GPPlugin() {
 
     override fun load() {
         instance = this
-        saveResource("language/ko.json", true)
+        saveResource("language/korean.json", true)
         logger.info("Loading Framework...")
     }
 

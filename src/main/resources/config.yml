@@ -9,4 +9,4 @@ database:
   pool_options:
     size: 10
 
-lang: ko
+language: korean
