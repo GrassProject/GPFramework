@@ -7,11 +7,19 @@ import java.io.File
 
 abstract class GTranslate<T : GPPlugin>(val plugin: T) {
 
-    private fun jsonGenerator(): File {
+    lateinit var jsonFile: File
+        private set
+
+    fun init() {
         plugin.reloadConfig()
-        val lang = plugin.config.getString("language") ?: "ko"
-        val json = File("${plugin.dataFolder}/language", "${lang}.json")
-        return json
+        val lang = plugin.config.getString("language") ?: "korean"
+
+        val langFolder = File(plugin.dataFolder, "language").apply { if (!exists()) mkdirs() }
+        jsonFile = File(langFolder, "$lang.json")
+
+        if (!jsonFile.exists()) {
+            plugin.saveResource("language/$lang.json", false)
+        }
     }
 
     fun literate(key: String, placeholders: Map<String, String>): String {
@@ -34,13 +42,11 @@ abstract class GTranslate<T : GPPlugin>(val plugin: T) {
     }
 
     fun literate(string: String): String {
-        val json = jsonGenerator()
-        return Gson().fromJson(json.readText(), JsonObject::class.java)[string]?.asString ?: string
+        return Gson().fromJson(jsonFile.readText(), JsonObject::class.java)[string]?.asString ?: string
     }
 
     fun fromList(string: String): MutableList<String> {
-        val json = jsonGenerator()
-        val array = Gson().fromJson(json.readText(), JsonObject::class.java)[string]
+        val array = Gson().fromJson(jsonFile.readText(), JsonObject::class.java)[string]
             .asJsonArray.mapNotNull { it.asString }.toMutableList()
         return array
     }
