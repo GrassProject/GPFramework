@@ -13,6 +13,8 @@ repositories {
 
 
 dependencies {
-    compileOnly("com.github.GrassProject:GPFramework:Tag")
+    compileOnly(""com.github.GrassProject.GPFramework:Core:Tag") // Only Framework API
+
+    compileOnly(""com.github.GrassProject.GPFramework:Tag") // Every Source of Framework
 }
 ```
