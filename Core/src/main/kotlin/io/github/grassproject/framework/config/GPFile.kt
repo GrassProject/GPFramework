@@ -5,19 +5,31 @@ import com.google.gson.JsonObject
 import org.bukkit.configuration.file.YamlConfiguration
 import java.io.File
 
-class GPFile(
-    folder: File,
-    name: String,
-    extension: String
-) {
-    private val file = File(folder, "$name.$extension")
+class GPFile {
+    private var file: File
+    var extension: EXTENSION = EXTENSION.UNKNOWN
+        private set
+
+    constructor(folder: File, name: String, ext: String) {
+        this.file = File(folder, "$name.$ext")
+        this.extension = EXTENSION.from(ext)
+    }
+
+    constructor(path: String) {
+        this.file = File(path)
+        val ext = file.extension
+        this.extension = EXTENSION.from(ext)
+    }
+
     val exists: Boolean get() = file.exists()
-    val extension: EXTENSION = EXTENSION.from(extension)
 
     fun reload(): File = File(file.path)
+
     fun load() {
-        if (file.exists()) return
-        file.createNewFile()
+        if (!file.exists()) {
+            file.parentFile?.mkdirs()
+            file.createNewFile()
+        }
     }
 
     fun toYml(): YamlConfiguration {
