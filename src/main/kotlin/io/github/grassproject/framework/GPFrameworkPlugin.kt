@@ -1,8 +1,8 @@
 package io.github.grassproject.framework
 
 import io.github.grassproject.framework.commands.GPFCommand
-import io.github.grassproject.framework.config.GPFile
-import io.github.grassproject.framework.config.init
+import io.github.grassproject.framework.config.ConfigFile
+import io.github.grassproject.framework.config.initConfig
 import io.github.grassproject.framework.core.GPPlugin
 import io.github.grassproject.framework.database.DatabaseManager
 import io.github.grassproject.framework.github.GithubAPI
@@ -31,8 +31,8 @@ class GPFrameworkPlugin : GPPlugin() {
             )).forEach { logger.bug(it) }
         }
 
-        val config = GPFile(dataFolder, "config.yml")
-        init(config)
+        val config = ConfigFile(dataFolder, "config.yml")
+        initConfig(config)
         DatabaseManager.initConfig(config)
         DatabaseManager.connect()
 

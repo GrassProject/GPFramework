@@ -25,7 +25,7 @@ fun GPPlugin.saveResource(resource: String, file: File) {
     }
 }
 
-fun GPPlugin.init(vararg configs: GPFile) {
+fun GPPlugin.initConfig(vararg configs: ConfigFile) {
     configs.forEach { yaml ->
         val file = File(dataFolder, yaml.name)
         if (!file.exists()) saveResource(yaml.name, file)
@@ -81,14 +81,30 @@ abstract class Config {
     open fun save() {}
 }
 
-open class ConfigFile(open val file: File) : Config() {
-    override var config: FileConfiguration = YamlConfiguration.loadConfiguration(file)
+open class ConfigFile(
+    pluginFolder: File,
+    open var name: String,
+    autoCreate: Boolean = false
+) {
+    val file: File = File(pluginFolder, name)
+
+    open var config: FileConfiguration = YamlConfiguration.loadConfiguration(file)
         set(value) {
             field = value
             save()
         }
 
-    override fun save() {
+    init {
+        if (autoCreate && !file.exists()) {
+            file.parentFile.mkdirs()
+            file.createNewFile()
+        }
+    }
+
+    constructor(pluginFolderPath: String, name: String, autoCreate: Boolean = false) :
+            this(File(pluginFolderPath), name, autoCreate)
+
+    open fun save() {
         config.save(file)
     }
 
@@ -96,17 +112,4 @@ open class ConfigFile(open val file: File) : Config() {
         config = if (file != null) YamlConfiguration.loadConfiguration(file)
         else YamlConfiguration.loadConfiguration(this.file)
     }
-}
-
-open class GPFile(pluginFolder: File, open var name: String) :
-    ConfigFile(File(pluginFolder, name)) {
-
-    constructor(pluginFolder: File, name: String, autoCreate: Boolean = false) : this(pluginFolder, name) {
-        if (autoCreate && !file.exists()) {
-            file.parentFile.mkdirs()
-            file.createNewFile()
-        }
-    }
-
-    constructor(pluginFolderPath: String, name: String, autoCreate: Boolean = false) : this(File(pluginFolderPath), name, autoCreate)
 }
