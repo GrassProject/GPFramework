@@ -26,6 +26,7 @@ class ItemBuilder(private val itemStack: ItemStack) {
     val persistentDataMap: MutableMap<PersistentDataSpace<*, *>, Any> = mutableMapOf()
     val persistentDataContainer: PersistentDataContainer
     val enchantments: MutableMap<Enchantment, Int>
+    var type: Material
     var amount: Int
     var displayName: Component? = null
     var unbreakable: Boolean
@@ -50,6 +51,9 @@ class ItemBuilder(private val itemStack: ItemStack) {
     var customModelDataComponent: CustomModelDataComponent? = null
 
     init {
+
+        type = itemStack.type
+
         amount = itemStack.amount
 
         val itemMeta: ItemMeta = checkNotNull(itemStack.itemMeta)
@@ -107,6 +111,7 @@ class ItemBuilder(private val itemStack: ItemStack) {
 
     fun removePDC(key: NamespacedKey) = apply { persistentDataContainer.remove(key) }
 
+    fun type(material: Material) = apply { this.type = material }
     fun amount(amount: Int) = apply { this.amount = amount }
     fun displayName(displayName: Component?) = apply { this.displayName = displayName }
     fun unbreakable(unbreakable: Boolean) = apply { this.unbreakable = unbreakable }
@@ -136,9 +141,11 @@ class ItemBuilder(private val itemStack: ItemStack) {
     fun clone() = ItemBuilder(build())
 
     fun regenerateItem() {
-        if (amount != itemStack.amount) itemStack.amount = amount
+        val baseStack = if (type != itemStack.type) itemStack.withType(type) else itemStack
 
-        val itemMeta = itemStack.itemMeta
+        if (amount != baseStack.amount) baseStack.amount = amount
+
+        val itemMeta = baseStack.itemMeta
 
         if (MinecraftVersion.V1_20_5.isAtOrAbove()) {
             if (itemName != null) itemMeta.itemName(itemName)
