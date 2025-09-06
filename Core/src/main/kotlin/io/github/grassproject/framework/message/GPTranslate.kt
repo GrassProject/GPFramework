@@ -5,14 +5,14 @@ import com.google.gson.JsonObject
 import io.github.grassproject.framework.core.GPPlugin
 import java.io.File
 
-abstract class GTranslate<T : GPPlugin>(val plugin: T) {
+abstract class GPTranslate(val plugin: GPPlugin) {
 
     lateinit var jsonFile: File
         private set
 
     fun init() {
         plugin.reloadConfig()
-        val lang = plugin.config.getString("language") ?: "korean"
+        val lang = plugin.config.getString("language") ?: "ko-kr"
 
         val langFolder = File(plugin.dataFolder, "language").apply { if (!exists()) mkdirs() }
         jsonFile = File(langFolder, "$lang.json")

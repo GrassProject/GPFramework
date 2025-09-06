@@ -7,6 +7,7 @@ import java.io.File
 import kotlin.reflect.KClass
 import kotlin.reflect.full.cast
 
+@Deprecated("Use GPFile")
 fun GPPlugin.saveResource(resource: String, file: File) {
     if (file.exists()) return
     file.parentFile.mkdirs()
@@ -25,6 +26,7 @@ fun GPPlugin.saveResource(resource: String, file: File) {
     }
 }
 
+@Deprecated("Use GPFile")
 fun GPPlugin.initConfig(vararg configs: ConfigFile) {
     configs.forEach { yaml ->
         val file = File(dataFolder, yaml.name)
@@ -34,6 +36,7 @@ fun GPPlugin.initConfig(vararg configs: ConfigFile) {
     }
 }
 
+@Deprecated("Use GPFile")
 abstract class Config {
 
     abstract var config: FileConfiguration
@@ -81,6 +84,7 @@ abstract class Config {
     open fun save() {}
 }
 
+@Deprecated("Use GPFile")
 open class ConfigFile(
     pluginFolder: File,
     open var name: String,

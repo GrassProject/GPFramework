@@ -8,7 +8,6 @@ load: STARTUP
 website: https://grassproject.github.io
 
 main: io.github.grassproject.framework.GPFrameworkPlugin
-bootstrapper: io.github.grassproject.framework.GPFrameworkBootstrap
 loader: io.github.grassproject.framework.GPFrameworkLoader
 
 dependencies:

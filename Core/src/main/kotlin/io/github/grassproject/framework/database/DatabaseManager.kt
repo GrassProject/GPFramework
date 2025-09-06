@@ -2,7 +2,8 @@ package io.github.grassproject.framework.database
 
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
-import io.github.grassproject.framework.config.ConfigFile
+import io.github.grassproject.framework.config.GPFile
+import io.github.grassproject.framework.config.getEnum
 import org.jetbrains.exposed.v1.core.Table
 import org.jetbrains.exposed.v1.jdbc.Database
 import org.jetbrains.exposed.v1.jdbc.SchemaUtils
@@ -19,15 +20,17 @@ object DatabaseManager {
     }
 
     @JvmStatic
-    fun initConfig(config: ConfigFile) {
-        val type = config.enum("database.type", DataType.SQLITE)
+    fun initConfig(config: GPFile) {
+        val configYaml = config.toYml()
 
-        val host = config.string("database.credentials.host", "localhost")
-        val port = config.int("database.credentials.port", 3306)
-        val database = config.string("database.credentials.database", "database")
-        val username = config.string("database.credentials.username", "root")
-        val password = config.string("database.credentials.password", "password")
-        val maxPoolSize = config.int("database.pool_options.size", 10)
+        val type = configYaml.getEnum<DataType>("database.type") ?: DataType.SQLITE
+
+        val host = configYaml.getString("database.credentials.host") ?: "localhost"
+        val port = configYaml.getInt("database.credentials.port", 3306)
+        val database = configYaml.getString("database.credentials.database") ?: "database"
+        val username = configYaml.getString("database.credentials.username") ?: "root"
+        val password = configYaml.getString("database.credentials.password") ?: "password"
+        val maxPoolSize = configYaml.getInt("database.pool_options.size", 10)
 
         driver = when (type) {
             DataType.MYSQL -> MySQLDriver(host, port, database, username, password, maxPoolSize)

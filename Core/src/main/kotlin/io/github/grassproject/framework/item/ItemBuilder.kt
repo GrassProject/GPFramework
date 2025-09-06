@@ -2,8 +2,10 @@ package io.github.grassproject.framework.item
 
 import com.google.common.collect.Multimap
 import io.github.grassproject.framework.util.bukkit.MinecraftVersion
-import io.github.grassproject.framework.util.component.toDefaultStyle
 import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.format.NamedTextColor
+import net.kyori.adventure.text.format.TextColor
+import net.kyori.adventure.text.format.TextDecoration
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.attribute.Attribute
@@ -182,7 +184,9 @@ class ItemBuilder(private val itemStack: ItemStack) {
             }
         }
 
-        itemMeta.lore(lore.toDefaultStyle())
+        itemMeta.lore(lore?.map {
+           it.toDefaultStyle()
+        })
 
         itemStack.itemMeta = itemMeta
         finalItemStack = itemStack
@@ -192,4 +196,7 @@ class ItemBuilder(private val itemStack: ItemStack) {
         if (finalItemStack == null) regenerateItem()
         return finalItemStack!!.clone()
     }
+
+    private fun Component.toDefaultStyle(color: TextColor? = NamedTextColor.WHITE): Component =
+        this.decorationIfAbsent(TextDecoration.ITALIC, TextDecoration.State.FALSE).colorIfAbsent(color)
 }

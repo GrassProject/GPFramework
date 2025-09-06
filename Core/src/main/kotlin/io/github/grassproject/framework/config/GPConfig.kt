@@ -2,6 +2,7 @@ package io.github.grassproject.framework.config
 
 import io.github.grassproject.framework.core.GPPlugin
 
+@Deprecated("Use GPFile")
 abstract class GPConfig<T : GPPlugin>(val plugin: T) {
     private val configs = mutableMapOf<String, ConfigFile>()
 
