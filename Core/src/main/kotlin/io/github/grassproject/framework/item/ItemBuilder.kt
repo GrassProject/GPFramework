@@ -2,10 +2,12 @@ package io.github.grassproject.framework.item
 
 import com.google.common.collect.Multimap
 import io.github.grassproject.framework.util.bukkit.MinecraftVersion
+import net.kyori.adventure.key.Key
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.format.TextColor
 import net.kyori.adventure.text.format.TextDecoration
+import org.bukkit.Color
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.attribute.Attribute
@@ -13,10 +15,15 @@ import org.bukkit.attribute.AttributeModifier
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
+import org.bukkit.inventory.meta.FireworkEffectMeta
 import org.bukkit.inventory.meta.ItemMeta
+import org.bukkit.inventory.meta.LeatherArmorMeta
+import org.bukkit.inventory.meta.MapMeta
 import org.bukkit.inventory.meta.components.CustomModelDataComponent
 import org.bukkit.persistence.PersistentDataContainer
 import org.bukkit.persistence.PersistentDataType
+import org.bukkit.potion.PotionEffect
+import org.bukkit.potion.PotionType
 
 class ItemBuilder(private val itemStack: ItemStack) {
 
@@ -26,6 +33,7 @@ class ItemBuilder(private val itemStack: ItemStack) {
     val persistentDataMap: MutableMap<PersistentDataSpace<*, *>, Any> = mutableMapOf()
     val persistentDataContainer: PersistentDataContainer
     val enchantments: MutableMap<Enchantment, Int>
+
     var type: Material
     var amount: Int
     var displayName: Component? = null
