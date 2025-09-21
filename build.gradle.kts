@@ -1,13 +1,13 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
-    kotlin("jvm") version "2.2.10"
+    kotlin("jvm") version "2.2.20"
     java
     id("com.gradleup.shadow") version "9.0.0-beta11"
 }
 
 group = "io.github.grassproject"
-version = "0.3-RC1"
+version = "0.3-RC2"
 
 val exposed = "1.0.0-beta-5"
 
@@ -75,9 +75,6 @@ tasks {
         inputs.properties(props)
         filteringCharset = "UTF-8"
         filesMatching("paper-plugin.yml") {
-            expand(props)
-        }
-        filesMatching("plugin.yml") {
             expand(props)
         }
     }
