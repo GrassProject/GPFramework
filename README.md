@@ -2,7 +2,7 @@
 
 ## 📮 Dependency
 
-[![](https://jitpack.io/v/GrassProject/GPFramework.svg)](https://jitpack.io/#GrassProject/GPFramework)
+[![](https://jitpack.io/v/GrassProject/Folra.svg)](https://jitpack.io/#GrassProject/Folra)
 
 ```gradle
 repositories {
@@ -13,8 +13,17 @@ repositories {
 
 
 dependencies {
-    compileOnly("com.github.GrassProject.GPFramework:Core:Tag") // Only Framework API
-
-    compileOnly("com.github.GrassProject:GPFramework:Tag") // Every Source of Framework
+    compileOnly("com.github.GrassProject:Folra:Tag")
 }
+```
+```yml
+# plugin.yml
+depend:
+  - Folra
+
+# paper-plugin.yml
+dependencies:
+  server:
+    Folra:
+      required: true
 ```
